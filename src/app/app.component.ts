@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import Ws from '@adonisjs/websocket-client'
+import Ws from '@adonisjs/websocket-client';
 const ws = Ws('ws://localhost:3333')
 
 @Component({

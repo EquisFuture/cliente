@@ -1,1 +1,107 @@
-<p>inventario works!</p>
+<app-navbar></app-navbar>
+<div class="container" style="margin-top: 30px;">
+<h1>Inventario</h1>
+
+<!-- Menú de búsqueda -->
+<div class="row" style="margin-top: 30px;">
+    <input [(ngModel)]="buscar" name="buscar" class="form-control col-6" type="search" placeholder="Buscar" aria-label="Search">
+    <button (click)="buscarConcepto()" class="btn btn-primary col-1" type="submit"><i class="fa fa-search"></i></button>
+    <button class="col-2 btn btn-success offset-3" data-toggle="modal" data-target="#agregar">Añadir</button>
+</div>
+
+<!-- Tabla de inventario -->
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">id</th>
+        <th scope="col">Concepto</th>
+        <th scope="col">Descripción</th>
+        <th scope="col">Cantidad</th>
+        <th scope="col">Precio de Lista</th>
+        <th scope="col">Precio al Público</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let con of inventario">
+        <th scope="row"> {{ con.id }} </th>
+        <td> {{ con.concepto }} </td>
+        <td> {{ con.descripcion }} </td>
+        <td [ngClass]="{'table-warning': con.cantidad < 101 && con.cantidad > 50, 'table-danger': con.cantidad < 51}"> {{ con.cantidad }} </td>
+        <td>$ {{ con.precio_lista }}</td>
+        <td>$ {{ con.precio_publico }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Formulario de registro -->
+<div class="modal fade" id="agregar" tabindex="-1" role="dialog" aria-labelledby="agregarLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Añadir Concepto</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="concepto_registrar">Concepto</label>
+              <input [(ngModel)]="concepto_registrar" name="concepto_registrar" type="text" class="form-control" id="concepto_registrar" required>
+            </div>
+            <div class="form-group">
+              <label for="descripcion_registrar">Descripción</label>
+              <input [(ngModel)]="descripcion_registrar" name="descripcion_registrar" type="text" class="form-control" id="descripcion_registrar" required>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="cantidad_registrar">Cantidad</label>
+                <input [(ngModel)]="cantidad_registrar" name="cantidad_registrar" min="1" type="number" class="form-control" id="cantidad_registrar" required>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="udm_registrar">Unidad de medida</label>
+                <select class="form-control" id="udm_registrar">
+                  <option value="Pieza">Pieza</option>
+                  <option value="Elemento">Elemento</option>
+                  <option value="Servicio">Servicio</option>
+                  <option value="Actividad">Actividad</option>
+                  <option value="Trabajo">Trabajo</option>
+                  <option value="Conjunto">Conjunto</option>
+                  <option value="Metro cuadrado">Metro cuadrado</option>
+                  <option value="Kit (Conjunto de piezas)">Kit (Conjunto de piezas)</option>
+                  <option value="Docena">Docena</option>
+                  <option value="Par">Par</option>
+                  <option value="Lote">Lote</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="precio_lista_registrar">Precio Lista</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">$</div>
+                  </div>
+                  <input [(ngModel)]="precio_lista_registrar" name="precio_lista_registrar" type="number" min="1" class="form-control" id="precio_lista_registrar" required>
+                </div>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="precio_publico_registrar">Precio al público</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">$</div>
+                  </div>
+                  <input [(ngModel)]="precio_publico_registrar" name="precio_publico_registrar" type="number" min="1" class="form-control" id="precio_publico_registrar" required>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-warning text-white" data-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-success" (click)="registrarConcepto()">Registrar</button>
+        </div>
+      </div>
+    </div>
+  </div>

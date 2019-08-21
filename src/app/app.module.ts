@@ -19,6 +19,7 @@ import { ProveedorRegistroComponent } from './coponentes/proveedor-registro/prov
 import { MenuAppsComponent } from './componentes/menu-apps/menu-apps.component';
 
 // ventas
+import { VentaComponent } from './coponentes/venta/venta.component';
 
 
 @NgModule({
@@ -29,11 +30,8 @@ import { MenuAppsComponent } from './componentes/menu-apps/menu-apps.component';
     InventarioComponent,
     ProveedorRegistroComponent,
     ConceptoRegistroComponent,
-<<<<<<< HEAD
+    MenuAppsComponent,
     VentaComponent
-=======
-    MenuAppsComponent
->>>>>>> f564121d1149c256dd79fd820e29f55d50d2357e
   ],
   imports: [
     BrowserModule,

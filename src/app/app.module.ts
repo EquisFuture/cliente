@@ -20,8 +20,6 @@ import { MenuAppsComponent } from './componentes/menu-apps/menu-apps.component';
 
 // ventas
 import { VentaComponent } from './coponentes/venta/venta.component';
-
-
 @NgModule({
   declarations: [
     AppComponent,

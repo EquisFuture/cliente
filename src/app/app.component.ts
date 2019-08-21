@@ -10,8 +10,9 @@ const ws = Ws('ws://localhost:3333')
 export class AppComponent {
   title = 'cliente';
   constructor(){
+    
     ws.connect();
-    const socket = ws.subscribe('chat');
+    const socket = ws.subscribe('inventario:1');
     socket.on('ready', () => {
       console.log("conectado")
     })

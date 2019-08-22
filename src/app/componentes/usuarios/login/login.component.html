@@ -1,1 +1,22 @@
-<p>login works!</p>
+<app-navbar></app-navbar>
+<div class="custom-control custom-checkbox mb-3"></div>
+<div class="custom-control custom-checkbox mb-3"></div>
+<div class="container row">
+    <div class="card-body col-6 offset-4 bg-light" style="border-radius: 10px;">
+        <h5 class="card-title text-center">Inicio de Sesión</h5>
+        <form class="form">
+            <div class="form-label-group">
+                <label for="inputEmail">Ingresa tu Correo</label>
+                <input [(ngModel)]="email" name="email" type="email" class="form-control" placeholder="" required autofocus>
+            </div>
+        
+            <div class="form-label-group">
+                <label for="inputPassword">Contraseña</label>
+                <input [(ngModel)]="password" name="password" type="password" class="form-control" placeholder="" required>
+            </div>
+
+            <div class="custom-control custom-checkbox mb-3"></div>
+          <button class="btn btn-primary btn-block" (click)="ingresar()">Ingresar</button>
+        </form>
+      </div>
+</div>

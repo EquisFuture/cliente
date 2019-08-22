@@ -28,7 +28,7 @@
         <td> {{ con.concepto }} </td>
         <td> {{ con.descripcion }} </td>
         <td> {{ con.udm }} </td>
-        <td [ngClass]="{'table-warning': con.cantidad < 101 && con.cantidad > 50, 'table-danger': con.cantidad < 51}"> {{ con.cantidad }} </td>
+        <td [ngClass]="{'table-warning': (con.cantidad < 101 && con.cantidad > 50) && (con.udm == 'Pieza' || con.udm == 'Kit (Conjunto de piezas)'), 'table-danger': (con.cantidad < 51) && (con.udm == 'Pieza' || con.udm == 'Kit (Conjunto de piezas)')}"> {{ con.cantidad }} </td>
         <td>$ {{ con.precio_lista }}</td>
         <td>$ {{ con.precio_publico }}</td>
       </tr>

@@ -3,6 +3,7 @@ import { AppComponent } from './app.component';
 import { Routes, RouterModule } from '@angular/router';
 
 // imports generales
+import { LoginComponent } from './componentes/usuarios/login/login.component';
 import { PaginaPrincipalComponent } from './componentes/pagina-principal/pagina-principal.component';
 
 // almacen
@@ -15,10 +16,12 @@ import { VentaComponent } from './coponentes/venta/venta.component';
 
 
 const routes: Routes = [
-  {path: '', component: PaginaPrincipalComponent},
+  {path: '', component: LoginComponent},
+  {path: 'inicio', component: PaginaPrincipalComponent},
   {path: 'almacen', component: InventarioComponent},
   {path: 'ventas', component: VentaComponent},
-  {path: '**', redirectTo: "" }
+  {path: 'login', component: LoginComponent},
+  {path: '**', redirectTo: "inicio" }
 ];
 
 @NgModule({

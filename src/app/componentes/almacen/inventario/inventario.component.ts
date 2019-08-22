@@ -17,12 +17,12 @@ export class InventarioComponent implements OnInit, OnDestroy {
     this.inventario = new Array<Concepto>();
     this.buscar = "";
 
+    this.inventarioService.conectar();
     this.obtenerInventario();
-    /*this.inventarioService.conectar();
 
     this.inventarioService.lista_conceptos.subscribe(inv => {
       this.inventario = inv;
-    });*/
+    });
   }
 
   ngOnDestroy(): void {
@@ -32,8 +32,7 @@ export class InventarioComponent implements OnInit, OnDestroy {
 
   obtenerInventario(){
     this.inventarioService.obtenerInventario().subscribe(inventario=>{
-      this.inventario = inventario;
-      //this.inventarioService.actualizarInventario(inventario);
+      this.inventarioService.enviarInventario(inventario);
     });
   }
 
@@ -53,6 +52,7 @@ export class InventarioComponent implements OnInit, OnDestroy {
     }
   }
 
+  // campos del modal para registrar un nuevo concepto
   concepto_registrar: string;
   descripcion_registrar: string;
   cantidad_registrar: number;
@@ -67,6 +67,35 @@ export class InventarioComponent implements OnInit, OnDestroy {
     concepto.udm = this.udm_registrar;
     concepto.precio_lista = this.precio_lista_registrar;
     concepto.precio_publico = this.precio_publico_registrar;
-    console.log(concepto);
+
+    if(this.verificarCampos()){
+      console.log(concepto);
+      this.inventarioService.registrarConcepto(concepto).subscribe(inv => {
+        this.inventario = inv;
+        this.limpiarCampos();
+      });
+    }else{
+      alert('complete todos los campos.')
+    }
+  }
+
+  verificarCampos(): boolean{
+    if(this.concepto_registrar && this.descripcion_registrar && this.cantidad_registrar && this.udm_registrar && this.precio_lista_registrar && this.precio_publico_registrar){ return true; }
+    else{ return false; }
+  }
+
+  limpiarCampos(){
+    this.concepto_registrar = "";
+    this.descripcion_registrar = "";
+    this.cantidad_registrar = null;
+    this.udm_registrar = "";
+    this.precio_lista_registrar = null;
+    this.precio_publico_registrar = null;
+  }
+
+  onKeydown(event) {
+    if (event.key === "Enter") {
+      this.buscarConcepto();
+    }
   }
 }

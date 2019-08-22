@@ -17,6 +17,9 @@ import { ConceptoRegistroComponent } from './componentes/almacen/concepto-regist
 // compras
 import { ProveedorRegistroComponent } from './coponentes/proveedor-registro/proveedor-registro.component';
 import { MenuAppsComponent } from './componentes/menu-apps/menu-apps.component';
+import { LoginComponent } from './componentes/usuarios/login/login.component';
+import { UsuarioRegistroComponent } from './componentes/usuarios/usuario-registro/usuario-registro.component';
+import { UsuariosComponent } from './componentes/usuarios/usuarios/usuarios.component';
 
 // ventas
 
@@ -29,7 +32,10 @@ import { MenuAppsComponent } from './componentes/menu-apps/menu-apps.component';
     InventarioComponent,
     ProveedorRegistroComponent,
     ConceptoRegistroComponent,
-    MenuAppsComponent
+    MenuAppsComponent,
+    LoginComponent,
+    UsuarioRegistroComponent,
+    UsuariosComponent
   ],
   imports: [
     BrowserModule,

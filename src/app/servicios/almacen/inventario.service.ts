@@ -46,8 +46,13 @@ export class InventarioService {
   }
 
   actualizarInventario(inventario){
-    console.log("** Enviando inventario")
-    ws.getSubscription('inventario').emit('actualizar', inventario);
+    this.conceptos.next(inventario);
+  }
+
+  enviarInventario(inventario){
+    try{
+      ws.getSubscription('inventario').emit('actualizar', inventario);
+    }catch(e){ console.log(e); }
   }
 
   // métodos para el inventario
@@ -55,6 +60,11 @@ export class InventarioService {
   obtenerInventario(): Observable<Concepto[]>{
     let headers = new HttpHeaders().set('Content-Type','application/json');
     return this.request.get<Concepto[]>(this.url +'obtener-inventario', {headers:headers});
+  }
+
+  registrarConcepto(c: Concepto): Observable<Concepto[]>{
+    let headers = new HttpHeaders().set('Content-Type','application/json');
+    return this.request.post<Concepto[]>(this.url +'registrar-concepto', JSON.stringify(c), {headers:headers});
   }
 
   buscarConcepto(concepto: string): Observable<Concepto[]>{

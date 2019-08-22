@@ -7,7 +7,7 @@ import { Usuario } from '../modelos/Usuario';
 })
 export class UsuariosService {
 
-  url: string = 'http://192.168.50.16:3333/';
+  url: string = 'http://127.0.0.1:3333/';
   constructor(private request: HttpClient) { }
 
   registrarUsuario(json: any){

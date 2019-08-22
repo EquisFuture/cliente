@@ -4,7 +4,7 @@
 
 <!-- Menú de búsqueda -->
 <div class="row" style="margin-top: 30px;">
-    <input [(ngModel)]="buscar" name="buscar" class="form-control col-6" type="search" placeholder="Buscar" aria-label="Search">
+    <input [(ngModel)]="buscar" name="buscar" class="form-control col-6" type="search" placeholder="Buscar" aria-label="Search" (keydown)="onKeydown($event)">
     <button (click)="buscarConcepto()" class="btn btn-primary col-1" type="submit"><i class="fa fa-search"></i></button>
     <button class="col-2 btn btn-success offset-3" data-toggle="modal" data-target="#agregar">Añadir</button>
 </div>
@@ -16,6 +16,7 @@
         <th scope="col">id</th>
         <th scope="col">Concepto</th>
         <th scope="col">Descripción</th>
+        <th scope="col">Unidad de medida</th>
         <th scope="col">Cantidad</th>
         <th scope="col">Precio de Lista</th>
         <th scope="col">Precio al Público</th>
@@ -26,13 +27,14 @@
         <th scope="row"> {{ con.id }} </th>
         <td> {{ con.concepto }} </td>
         <td> {{ con.descripcion }} </td>
-        <td [ngClass]="{'table-warning': con.cantidad < 101 && con.cantidad > 50, 'table-danger': con.cantidad < 51}"> {{ con.cantidad }} </td>
+        <td> {{ con.udm }} </td>
+        <td [ngClass]="{'table-warning': (con.cantidad < 101 && con.cantidad > 50) && (con.udm == 'Pieza' || con.udm == 'Kit (Conjunto de piezas)'), 'table-danger': (con.cantidad < 51) && (con.udm == 'Pieza' || con.udm == 'Kit (Conjunto de piezas)')}"> {{ con.cantidad }} </td>
         <td>$ {{ con.precio_lista }}</td>
         <td>$ {{ con.precio_publico }}</td>
       </tr>
     </tbody>
   </table>
-</div>
+</div> <!-- fin del container -->
 
 <!-- Formulario de registro -->
 <div class="modal fade" id="agregar" tabindex="-1" role="dialog" aria-labelledby="agregarLabel" aria-hidden="true">
@@ -61,7 +63,7 @@
               </div>
               <div class="form-group col-md-6">
                 <label for="udm_registrar">Unidad de medida</label>
-                <select class="form-control" id="udm_registrar">
+                <select [(ngModel)]="udm_registrar" name="udm_registrar" class="form-control" id="udm_registrar">
                   <option value="Pieza">Pieza</option>
                   <option value="Elemento">Elemento</option>
                   <option value="Servicio">Servicio</option>
@@ -100,7 +102,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-warning text-white" data-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-success" (click)="registrarConcepto()">Registrar</button>
+          <button type="button" class="btn btn-success" (click)="registrarConcepto()" data-dismiss="modal">Registrar</button>
         </div>
       </div>
     </div>

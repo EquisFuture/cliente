@@ -11,3 +11,7 @@ div{
 div.row{
     margin-bottom: 30px;
 }
+
+table{
+    cursor: default;
+}

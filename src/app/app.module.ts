@@ -9,14 +9,16 @@ import { HttpClientModule } from '@angular/common/http';
 // imports generales
 import { PaginaPrincipalComponent } from './componentes/pagina-principal/pagina-principal.component';
 import { NavbarComponent } from './componentes/navbar/navbar.component';
+import { MenuAppsComponent } from './componentes/menu-apps/menu-apps.component';
+import { LoginComponent } from './componentes/usuarios/login/login.component';
+import { UsuarioRegistroComponent } from './componentes/usuarios/usuario-registro/usuario-registro.component';
+import { UsuariosComponent } from './componentes/usuarios/usuarios/usuarios.component';
 
 // almacen
 import { InventarioComponent } from './componentes/almacen/inventario/inventario.component';
-import { ConceptoRegistroComponent } from './componentes/almacen/concepto-registro/concepto-registro.component';
 
 // compras
 import { ProveedorRegistroComponent } from './coponentes/proveedor-registro/proveedor-registro.component';
-import { MenuAppsComponent } from './componentes/menu-apps/menu-apps.component';
 
 // ventas
 import { VentaComponent } from './componentes/venta/venta.component';
@@ -27,8 +29,10 @@ import { VentaComponent } from './componentes/venta/venta.component';
     NavbarComponent,
     InventarioComponent,
     ProveedorRegistroComponent,
-    ConceptoRegistroComponent,
     MenuAppsComponent,
+    LoginComponent,
+    UsuarioRegistroComponent,
+    UsuariosComponent,
     VentaComponent
   ],
   imports: [

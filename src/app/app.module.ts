@@ -31,7 +31,8 @@ import { VentaComponent } from './componentes/venta/venta.component';
     InventarioComponent,
     MenuAppsComponent,
     LoginComponent,
-    UsuariosComponent
+    UsuariosComponent,
+    VentaComponent
   ],
   imports: [
     BrowserModule,

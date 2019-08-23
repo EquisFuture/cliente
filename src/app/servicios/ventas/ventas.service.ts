@@ -45,6 +45,8 @@ export class VentasService {
   obtenerVentas():Observable<Venta[]>{
     let headers = new HttpHeaders().set('Content-Type','application/json');
     return this.request.get<Venta[]>(this.url +'obtener-ventas', {headers:headers});
+
+    
   }
   obtenerClientes():Observable<Venta[]>{
     let headers = new HttpHeaders().set('Content-Type','application/json');

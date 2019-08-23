@@ -24,6 +24,7 @@ const routes: Routes = [
   {path: '', component: LoginComponent, canActivate:[LoginGuard]},
   {path: 'inicio', component: PaginaPrincipalComponent, canActivate:[AuthGuard]},
   {path: 'almacen', component: InventarioComponent, canActivate:[AuthGuard]},
+  {path: 'ventas', component: VentaComponent, canActivate:[AuthGuard]},
   {path: 'login', component: LoginComponent, canActivate:[LoginGuard]},
   {path: 'usuarios', component: UsuariosComponent, canActivate:[AuthGuard]},
   {path: '**', redirectTo: ""}

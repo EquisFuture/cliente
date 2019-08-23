@@ -12,6 +12,8 @@ export class VentaComponent implements OnInit {
   venta= new Array<Venta>();
   buscar: string;
   ngOnInit() {
+    let date = Date.now();
+    console.log(date);
     this.venta = new Array<Venta>();
     this.buscar = "";
 

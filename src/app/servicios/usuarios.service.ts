@@ -11,7 +11,7 @@ export class UsuariosService {
   constructor(private request: HttpClient) { }
 
   registrarUsuario(json: any){
-    let headers = new HttpHeaders().set('Content-Type','application/json');
+    let headers = new HttpHeaders().set('Content-Type','application/json').set('auth',localStorage.getItem('token'));
     return this.request.post(this.url + 'registrar-usuario', json, {headers:headers});
   }
 

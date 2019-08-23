@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import Ws from '@adonisjs/websocket-client';
-const ws = Ws('ws://localhost:3333')
 
 @Component({
   selector: 'app-root',
@@ -10,15 +9,6 @@ const ws = Ws('ws://localhost:3333')
 export class AppComponent {
   title = 'cliente';
   constructor(){
-    
-    ws.connect();
-    const socket = ws.subscribe('inventario:1');
-    socket.on('ready', () => {
-      console.log("conectado")
-    })
-    socket.on('error', (error) => {
-      console.log(error)
-    })
   }
 }
  

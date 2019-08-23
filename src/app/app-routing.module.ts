@@ -10,7 +10,7 @@ import { PaginaPrincipalComponent } from './componentes/pagina-principal/pagina-
 import { InventarioComponent } from './componentes/almacen/inventario/inventario.component';
 
 // ventas
-import { VentaComponent } from './coponentes/venta/venta.component';
+import { VentaComponent } from './componentes/venta/venta.component';
 
 // compras
 

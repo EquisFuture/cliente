@@ -1,1 +1,95 @@
 <app-navbar></app-navbar>
+<div class="container" style="margin-top: 30px;">
+<h1>Ventas</h1>
+
+<!-- Menú de búsqueda -->
+<div class="row" style="margin-top: 30px;">
+    <input [(ngModel)]="buscar" name="buscar" class="form-control col-6" type="search" placeholder="Buscar" aria-label="Search" (keydown)="onKeydown($event)">
+    <button (click)="buscarConcepto()" class="btn btn-primary col-1" type="submit"><i class="fa fa-search"></i></button>
+    <button class="col-2 btn btn-success offset-3" data-toggle="modal" data-target="#agregar">Añadir</button>
+</div>
+
+<!-- Tabla de Ventas -->
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">id</th>
+        <th scope="col">Cliente</th>
+        <th scope="col">Fecha Venta</th>
+        <th scope="col">Subtotal</th>
+        <th scope="col">Impuesto</th>
+        <th scope="col">Total</th>
+        <th> </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let v of venta">
+        <th scope="row"> {{ v.id }} </th>
+        <td> {{ v.cliente}} </td>
+        <td >{{ v.fecha | date }}</td>
+        <td>$ {{ v.subtotal }} </td>
+        <td>$ {{ v.impuestos}} </td>
+        <td>$ {{ v.total }}</td>
+        <td><button data-toggle="modal" data-target="#detalles" type="button"  name="" id="" class="btn btn-primary btn-sm btn-block" style="width: 3rem;"><i class="fa  fa-book"></i></button></td>
+      </tr>
+    </tbody>
+  </table>
+</div> <!-- fin del container -->
+
+<!-- Formulario de registro -->
+<div class="modal fade" id="agregar" tabindex="-1" role="dialog" aria-labelledby="agregarLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Registrar Venta</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="concepto_registrar">Cliente</label>
+              <input [(ngModel)]="cliente_registrar" name="cliente_registrar" type="text" class="form-control" id="concepto_registrar" required>
+            </div>
+
+            <div class="form-group">
+              <label for="descripcion_registrar">Descripción</label>
+              <input [(ngModel)]="descripcion_registrar" name="descripcion_registrar" type="text" class="form-control" id="descripcion_registrar" required>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="cantidad_registrar">Cantidad</label>
+                <input [(ngModel)]="cantidad_registrar" name="cantidad_registrar" min="1" type="number" class="form-control" id="cantidad_registrar" required>
+              </div>
+            </div>
+           
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-warning text-white" data-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-success" (click)="registrarConcepto()" data-dismiss="modal">Registrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Detalles Modal -->
+  <div class="modal fade" id="detalles" tabindex="-1" role="dialog" aria-labelledby="agregarLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Detalles</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-warning text-white" data-dismiss="modal">Cerrar</button>
+              
+            </div>
+          </div>
+        </div>
+      </div>

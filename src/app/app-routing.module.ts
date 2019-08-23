@@ -25,7 +25,7 @@ const routes: Routes = [
   {path: 'almacen', component: InventarioComponent, canActivate:[AuthGuard]},
   {path: 'login', component: LoginComponent, canActivate:[LoginGuard]},
   {path: 'usuarios', component: UsuariosComponent, canActivate:[AuthGuard]},
-  {path: '**',  component: LoginComponent, canActivate:[LoginGuard]}
+  {path: '**', redirectTo: '' }
 ];
 
 @NgModule({

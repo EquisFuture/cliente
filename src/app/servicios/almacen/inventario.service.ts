@@ -16,7 +16,11 @@ export class InventarioService {
     private conceptos = new BehaviorSubject([]);
     lista_conceptos = this.conceptos.asObservable();
 
-  constructor(private request: HttpClient) { }
+    // aqui se guarda el concepto a editar
+    private concepto = new BehaviorSubject([]);
+    concepto_editar = this.concepto.asObservable();
+
+  constructor(private request: HttpClient) {  }
 
   conectar(){
     try{
@@ -55,6 +59,10 @@ export class InventarioService {
     }catch(e){ console.log(e); }
   }
 
+  actualizarConcepto(concepto){
+    this.concepto.next(concepto);
+  }
+
   // métodos para el inventario
   url: string = 'http://localhost:3333/';
   obtenerInventario(): Observable<Concepto[]>{
@@ -71,5 +79,10 @@ export class InventarioService {
     let json = {concepto: concepto};
     let headers = new HttpHeaders().set('Content-Type','application/json');
     return this.request.get<Concepto[]>(this.url +'buscar-inventario', {headers:headers, params: json});
+  }
+
+  editarConcepto(concepto): Observable<Concepto[]>{
+    let headers = new HttpHeaders().set('Content-Type','application/json');
+    return this.request.post<Concepto[]>(this.url +'editar-concepto', concepto, {headers:headers});
   }
 }

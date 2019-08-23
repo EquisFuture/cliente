@@ -18,10 +18,10 @@ import { UsuariosComponent } from './componentes/usuarios/usuarios/usuarios.comp
 import { InventarioComponent } from './componentes/almacen/inventario/inventario.component';
 
 // compras
-import { ProveedorRegistroComponent } from './coponentes/proveedor-registro/proveedor-registro.component';
+
 
 // ventas
-import { VentaComponent } from './coponentes/venta/venta.component';
+
 
 @NgModule({
   declarations: [
@@ -29,12 +29,10 @@ import { VentaComponent } from './coponentes/venta/venta.component';
     PaginaPrincipalComponent,
     NavbarComponent,
     InventarioComponent,
-    ProveedorRegistroComponent,
     MenuAppsComponent,
     LoginComponent,
     UsuarioRegistroComponent,
-    UsuariosComponent,
-    VentaComponent
+    UsuariosComponent
   ],
   imports: [
     BrowserModule,

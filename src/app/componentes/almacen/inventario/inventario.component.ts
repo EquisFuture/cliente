@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { InventarioService } from 'src/app/servicios/almacen/inventario.service';
 import { Concepto } from 'src/app/modelos/Concepto';
+declare var $:any;
 
 @Component({
   selector: 'app-inventario',
@@ -10,18 +11,31 @@ import { Concepto } from 'src/app/modelos/Concepto';
 export class InventarioComponent implements OnInit, OnDestroy {
 
   constructor(private inventarioService: InventarioService) { }
+  // campos del modal para editar un concepto
+  concepto_editar: string;
+  descripcion_editar: string;
+  udm_editar: string;
+  precio_lista_editar: number;
+  precio_publico_editar: number;
+  concepto_edit: Array<Concepto>;
 
   inventario = new Array<Concepto>();
   buscar: string;
   ngOnInit() {
     this.inventario = new Array<Concepto>();
     this.buscar = "";
+    this.concepto_edit = new Array<Concepto>(); 
 
     this.inventarioService.conectar();
     this.obtenerInventario();
 
     this.inventarioService.lista_conceptos.subscribe(inv => {
       this.inventario = inv;
+    });
+
+    this.inventarioService.concepto_editar.subscribe(con => {
+      this.concepto_edit = con;
+      this.asignarConceptoEditar((con as unknown) as Concepto);
     });
   }
 
@@ -39,7 +53,6 @@ export class InventarioComponent implements OnInit, OnDestroy {
   buscarConcepto(){
     if(this.buscar){
       this.inventarioService.buscarConcepto(this.buscar).subscribe(inv => {
-        console.log(inv)
         if(inv.length != 0){
           this.inventario = inv;
         }
@@ -50,6 +63,43 @@ export class InventarioComponent implements OnInit, OnDestroy {
     }else{
       this.obtenerInventario();
     }
+  }
+
+  editarConcepto(){
+    if(this.verificarCamposEditar()){
+      let id = (this.concepto_edit as unknown) as Concepto;
+      let concepto = {
+        id: id.id,
+        concepto: this.concepto_editar,
+        descripcion: this.descripcion_editar,
+        udm: this.udm_editar,
+        precio_lista: this.precio_lista_editar,
+        precio_publico: this.precio_publico_editar }
+
+      this.inventarioService.editarConcepto(concepto).subscribe(inventario => {
+        this.inventarioService.actualizarInventario(inventario);
+      });
+      this.limpiarCamposEditar(); 
+    }else{
+      alert('complete todos los campos.')
+    }
+  }
+
+  asignarConceptoEditar(con: Concepto){
+    if(con){
+      this.concepto_editar = con.concepto;
+      this.descripcion_editar = con.descripcion;
+      this.udm_editar = con.udm;
+      this.precio_lista_editar = con.precio_lista;
+      this.precio_publico_editar = con.precio_publico;
+    }else{ console.log(con) }
+  }
+  limpiarCamposEditar(){
+    this.concepto_editar = null;
+    this.descripcion_editar = null;
+    this.udm_editar = null;
+    this.precio_lista_editar = null;
+    this.precio_publico_editar = null;
   }
 
   // campos del modal para registrar un nuevo concepto
@@ -97,5 +147,15 @@ export class InventarioComponent implements OnInit, OnDestroy {
     if (event.key === "Enter") {
       this.buscarConcepto();
     }
+  }
+
+  // Eventos de un concepto
+  clickConcepto(concepto: Concepto){
+    this.inventarioService.actualizarConcepto(concepto);
+  }
+
+  verificarCamposEditar(): boolean{
+    if(this.concepto_editar && this.descripcion_editar && this.udm_editar && this.precio_lista_editar && this.precio_publico_editar){ return true; }
+    else{ return false; }
   }
 }

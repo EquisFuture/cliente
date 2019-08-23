@@ -10,7 +10,7 @@ import { PaginaPrincipalComponent } from './componentes/pagina-principal/pagina-
 import { InventarioComponent } from './componentes/almacen/inventario/inventario.component';
 
 // ventas
-import { VentaComponent } from './coponentes/venta/venta.component';
+
 
 // compras
 
@@ -19,7 +19,6 @@ const routes: Routes = [
   {path: '', component: LoginComponent},
   {path: 'inicio', component: PaginaPrincipalComponent},
   {path: 'almacen', component: InventarioComponent},
-  {path: 'ventas', component: VentaComponent},
   {path: 'login', component: LoginComponent},
   {path: '**', redirectTo: "inicio" }
 ];

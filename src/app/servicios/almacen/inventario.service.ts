@@ -71,7 +71,7 @@ export class InventarioService {
   }
 
   registrarConcepto(c: Concepto): Observable<Concepto[]>{
-    let headers = new HttpHeaders().set('Content-Type','application/json');
+    let headers = new HttpHeaders().set('Content-Type','application/json').set('auth',localStorage.getItem('token'));
     return this.request.post<Concepto[]>(this.url +'registrar-concepto', JSON.stringify(c), {headers:headers});
   }
 

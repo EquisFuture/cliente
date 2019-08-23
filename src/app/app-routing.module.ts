@@ -17,9 +17,9 @@ import { InventarioComponent } from './componentes/almacen/inventario/inventario
 
 const routes: Routes = [
   {path: '', component: LoginComponent},
+  {path: 'login', component: LoginComponent},
   {path: 'inicio', component: PaginaPrincipalComponent},
   {path: 'almacen', component: InventarioComponent},
-  {path: 'login', component: LoginComponent},
   {path: '**', redirectTo: "inicio" }
 ];
 

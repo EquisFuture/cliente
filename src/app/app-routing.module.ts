@@ -20,20 +20,12 @@ import { InventarioComponent } from './componentes/almacen/inventario/inventario
 
 
 const routes: Routes = [
-<<<<<<< HEAD
-  {path: '', component: LoginComponent},
-  {path: 'login', component: LoginComponent},
-  {path: 'inicio', component: PaginaPrincipalComponent},
-  {path: 'almacen', component: InventarioComponent},
-  {path: '**', redirectTo: "inicio" }
-=======
   {path: '', component: LoginComponent, canActivate:[LoginGuard]},
   {path: 'inicio', component: PaginaPrincipalComponent, canActivate:[AuthGuard]},
   {path: 'almacen', component: InventarioComponent, canActivate:[AuthGuard]},
   {path: 'login', component: LoginComponent, canActivate:[LoginGuard]},
   {path: 'usuarios', component: UsuariosComponent, canActivate:[AuthGuard]},
-  {path: '**', redirectTo: ""}
->>>>>>> 3699e4de65c2e94d508ccfb4c91a1303bd3bb743
+  {path: '**',  component: LoginComponent, canActivate:[LoginGuard]}
 ];
 
 @NgModule({

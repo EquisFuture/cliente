@@ -20,6 +20,7 @@ import { InventarioComponent } from './componentes/almacen/inventario/inventario
 
 
 // ventas
+import { VentaComponent } from './componentes/venta/venta.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { InventarioComponent } from './componentes/almacen/inventario/inventario
     InventarioComponent,
     MenuAppsComponent,
     LoginComponent,
-    UsuariosComponent
+    UsuariosComponent,
+    VentaComponent
   ],
   imports: [
     BrowserModule,

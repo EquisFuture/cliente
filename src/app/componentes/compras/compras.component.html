@@ -1,11 +1,14 @@
 <app-navbar></app-navbar>
 
 <div class="container container-fluid mt-3">
-    <div class="row">
-        <div class="container">
-            <button class="btn  btn-primary">Registrar compra</button>
+    <h1>Compras</h1>
+  
+        <div class="row" style="margin-top: 30px;">
+            <input [(ngModel)]="buscar" name="buscar" class="form-control col-6" type="search" placeholder="Buscar" aria-label="Search" (keydown)="onKeydown($event)">
+            <button  class="btn btn-primary col-1" type="submit"><i class="fa fa-search"></i></button>
+            <button class="col-2 btn btn-success offset-3" data-toggle="modal" data-target="#agregar">Añadir</button>
         </div>
-    </div>
+  
     <div class="row">
         
         <table class="table table-hover">
@@ -31,3 +34,75 @@
     </table>
 </div>
 </div>
+<!-- Formulario de registro -->
+<div class="modal fade" id="agregar" tabindex="-1" role="dialog" aria-labelledby="agregarLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Añadir Compra</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="form-group">
+                  <label for="compra_registrar">compra</label>
+                  <input name="compra_registrar" type="text" class="form-control" id="compra_registrar" required>
+                </div>
+                <div class="form-group">
+                  <label for="descripcion_registrar">Descripción</label>
+                  <input  name="descripcion_registrar" type="text" class="form-control" id="descripcion_registrar" required>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="cantidad_registrar">Cantidad</label>
+                    <input name="cantidad_registrar" min="1" type="number" class="form-control" id="cantidad_registrar" required>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="udm_registrar">Unidad de medida</label>
+                    <select  name="udm_registrar" class="form-control" id="udm_registrar">
+                      <option value="Pieza">Pieza</option>
+                      <option value="Elemento">Elemento</option>
+                      <option value="Servicio">Servicio</option>
+                      <option value="Actividad">Actividad</option>
+                      <option value="Trabajo">Trabajo</option>
+                      <option value="Conjunto">Conjunto</option>
+                      <option value="Metro cuadrado">Metro cuadrado</option>
+                      <option value="Kit (Conjunto de piezas)">Kit (Conjunto de piezas)</option>
+                      <option value="Docena">Docena</option>
+                      <option value="Par">Par</option>
+                      <option value="Lote">Lote</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="precio_lista_registrar">Precio Lista</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <div class="input-group-text">$</div>
+                      </div>
+                      <input  name="precio_lista_registrar" type="number" min="1" class="form-control" id="precio_lista_registrar" required>
+                    </div>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="precio_publico_registrar">Precio al público</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <div class="input-group-text">$</div>
+                      </div>
+                      <input  name="precio_publico_registrar" type="number" min="1" class="form-control" id="precio_publico_registrar" required>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-warning text-white" data-dismiss="modal">Cancelar</button>
+              <button type="button" class="btn btn-success" data-dismiss="modal">Registrar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    

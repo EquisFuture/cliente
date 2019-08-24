@@ -19,6 +19,16 @@ export class ComprasComponent implements OnInit {
 
   getTabla(){
     this.servicio.get('compras').subscribe((r: Compra[]) => {
+      r.forEach(element => {
+        this.servicio.get('buscar-usuario/'+element.autoriza).subscribe(us =>{
+          let temp = JSON.parse(JSON.stringify(us));
+          element.autoriza = temp.usuario;
+        });
+        this.servicio.get('buscar-proveedor/'+element.proveedor).subscribe(pro =>{
+          let temp = JSON.parse(JSON.stringify(pro));
+          element.proveedor = temp.proveedor;
+        });
+      });
       console.log(r);
       this.tabla_compras = r;
     });

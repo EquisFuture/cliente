@@ -17,11 +17,11 @@ import { UsuariosComponent } from './componentes/usuarios/usuarios/usuarios.comp
 import { InventarioComponent } from './componentes/almacen/inventario/inventario.component';
 
 // compras
+import { ComprasComponent } from './componentes/compras/compras.component';
 
 
 // ventas
-import { VentaComponent } from './coponentes/venta/venta.component';
-import { ComprasComponent } from './componentes/compras/compras.component';
+import { VentaComponent } from './componentes/venta/venta.component';
 
 @NgModule({
   declarations: [

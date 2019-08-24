@@ -1,0 +1,33 @@
+<app-navbar></app-navbar>
+
+<div class="container container-fluid mt-3">
+    <div class="row">
+        <div class="container">
+            <button class="btn  btn-primary">Registrar compra</button>
+        </div>
+    </div>
+    <div class="row">
+        
+        <table class="table table-hover">
+            <thead class="bg-dark text-light">
+                <tr>
+                    <th scope="col">Folio</th>
+                    <th scope="col">Agente</th>
+                    <th scope="col">Proveedor</th>
+                    <th scope="col">Monto</th>
+               
+            </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of tabla_compras">
+                    <td>{{item.id}}</td>
+                    <td>{{item.autoriza}}</td>
+                    <td>{{item.proveedor}}</td>
+                    <td>{{item.costo_total}}</td>
+
+                </tr>
+                
+            </tbody>
+    </table>
+</div>
+</div>

@@ -22,6 +22,7 @@ import { ProveedorRegistroComponent } from './coponentes/proveedor-registro/prov
 
 // ventas
 import { VentaComponent } from './coponentes/venta/venta.component';
+import { ComprasComponent } from './componentes/compras/compras.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { VentaComponent } from './coponentes/venta/venta.component';
     LoginComponent,
     UsuarioRegistroComponent,
     UsuariosComponent,
-    VentaComponent
+    VentaComponent,
+    ComprasComponent
   ],
   imports: [
     BrowserModule,

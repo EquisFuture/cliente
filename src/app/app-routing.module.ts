@@ -13,6 +13,7 @@ import { InventarioComponent } from './componentes/almacen/inventario/inventario
 import { VentaComponent } from './coponentes/venta/venta.component';
 
 // compras
+import { ComprasComponent } from './componentes/compras/compras.component';
 
 
 const routes: Routes = [
@@ -20,8 +21,9 @@ const routes: Routes = [
   {path: 'inicio', component: PaginaPrincipalComponent},
   {path: 'almacen', component: InventarioComponent},
   {path: 'ventas', component: VentaComponent},
+  {path: 'compras', component: ComprasComponent},
   {path: 'login', component: LoginComponent},
-  {path: '**', redirectTo: "inicio" }
+  {path: '**', redirectTo: 'inicio' }
 ];
 
 @NgModule({

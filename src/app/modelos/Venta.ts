@@ -1,7 +1,8 @@
 export class Venta{
-    folio: number;
+    id: number;
     cliente: string;
     subtotal: number;
-    impuesto: number;
-    total: number;
+    impuestos: number;
+    fecha:string;
+    total: string;
 }

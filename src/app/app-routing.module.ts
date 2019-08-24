@@ -4,26 +4,31 @@ import { Routes, RouterModule } from '@angular/router';
 
 // imports generales
 import { LoginComponent } from './componentes/usuarios/login/login.component';
+import { UsuariosComponent } from './componentes/usuarios/usuarios/usuarios.component';
 import { PaginaPrincipalComponent } from './componentes/pagina-principal/pagina-principal.component';
+import { AuthGuard } from './guards/auth.guard';
+import { LoginGuard } from './guards/login.guard';
+import { RolGuard } from './guards/rol.guard';
 
 // almacen
 import { InventarioComponent } from './componentes/almacen/inventario/inventario.component';
 
 // ventas
-import { VentaComponent } from './coponentes/venta/venta.component';
+import { VentaComponent } from './componentes/venta/venta.component';
+
 
 // compras
 import { ComprasComponent } from './componentes/compras/compras.component';
 
 
 const routes: Routes = [
-  {path: '', component: LoginComponent},
-  {path: 'inicio', component: PaginaPrincipalComponent},
-  {path: 'almacen', component: InventarioComponent},
-  {path: 'ventas', component: VentaComponent},
-  {path: 'compras', component: ComprasComponent},
-  {path: 'login', component: LoginComponent},
-  {path: '**', redirectTo: 'inicio' }
+  {path: '', component: LoginComponent, canActivate:[LoginGuard]},
+  {path: 'inicio', component: PaginaPrincipalComponent, canActivate:[AuthGuard]},
+  {path: 'almacen', component: InventarioComponent, canActivate:[AuthGuard]},
+  {path: 'ventas', component: VentaComponent, canActivate:[AuthGuard]},
+  {path: 'login', component: LoginComponent, canActivate:[LoginGuard]},
+  {path: 'usuarios', component: UsuariosComponent, canActivate:[AuthGuard]},
+  {path: '**', redirectTo: '' }
 ];
 
 @NgModule({

@@ -3,7 +3,7 @@ import {HttpClient, HttpHeaders, HttpErrorResponse} from '@angular/common/http';
 import { Usuario } from '../modelos/Usuario';
 
 @Injectable({
-  providedIn: 'root'
+providedIn: "root"
 })
 export class UsuariosService {
 
@@ -20,3 +20,4 @@ export class UsuariosService {
     return this.request.post(this.url+"login", {email: email, password: password}, {headers:headers});
   }
 }
+;

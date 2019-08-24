@@ -11,14 +11,13 @@ import { PaginaPrincipalComponent } from './componentes/pagina-principal/pagina-
 import { NavbarComponent } from './componentes/navbar/navbar.component';
 import { MenuAppsComponent } from './componentes/menu-apps/menu-apps.component';
 import { LoginComponent } from './componentes/usuarios/login/login.component';
-import { UsuarioRegistroComponent } from './componentes/usuarios/usuario-registro/usuario-registro.component';
 import { UsuariosComponent } from './componentes/usuarios/usuarios/usuarios.component';
 
 // almacen
 import { InventarioComponent } from './componentes/almacen/inventario/inventario.component';
 
 // compras
-import { ProveedorRegistroComponent } from './coponentes/proveedor-registro/proveedor-registro.component';
+
 
 // ventas
 import { VentaComponent } from './coponentes/venta/venta.component';
@@ -30,10 +29,8 @@ import { ComprasComponent } from './componentes/compras/compras.component';
     PaginaPrincipalComponent,
     NavbarComponent,
     InventarioComponent,
-    ProveedorRegistroComponent,
     MenuAppsComponent,
     LoginComponent,
-    UsuarioRegistroComponent,
     UsuariosComponent,
     VentaComponent,
     ComprasComponent

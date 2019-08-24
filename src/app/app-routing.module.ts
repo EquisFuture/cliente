@@ -18,6 +18,7 @@ import { VentaComponent } from './componentes/venta/venta.component';
 
 
 // compras
+import { ComprasComponent } from './componentes/compras/compras.component';
 
 
 const routes: Routes = [
@@ -27,7 +28,8 @@ const routes: Routes = [
   {path: 'ventas', component: VentaComponent, canActivate:[AuthGuard]},
   {path: 'login', component: LoginComponent, canActivate:[LoginGuard]},
   {path: 'usuarios', component: UsuariosComponent, canActivate:[AuthGuard]},
-  {path: '**', redirectTo: ""}
+  {path: 'compras', component: ComprasComponent, canActivate:[AuthGuard]},  
+  {path: '**', redirectTo: '' }
 ];
 
 @NgModule({

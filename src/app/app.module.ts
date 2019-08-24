@@ -17,11 +17,11 @@ import { UsuariosComponent } from './componentes/usuarios/usuarios/usuarios.comp
 import { InventarioComponent } from './componentes/almacen/inventario/inventario.component';
 
 // compras
+import { ComprasComponent } from './componentes/compras/compras.component';
 
 
 // ventas
 import { VentaComponent } from './componentes/venta/venta.component';
-
 
 @NgModule({
   declarations: [
@@ -32,7 +32,8 @@ import { VentaComponent } from './componentes/venta/venta.component';
     MenuAppsComponent,
     LoginComponent,
     UsuariosComponent,
-    VentaComponent
+    VentaComponent,
+    ComprasComponent
   ],
   imports: [
     BrowserModule,

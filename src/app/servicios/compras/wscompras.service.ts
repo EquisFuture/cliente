@@ -30,18 +30,22 @@ export class WscomprasService {
   }
 
   subscripcion(canal: string) {
-    try {
-      ws.connect();
-
-      this.socket = ws.subscribe(canal);
-      this.socket.on('ready', () => {
-        console.log('Conexion exitosa al socket Compras');
-      });
-      this.socket.on('error', () => {
-        console.log('Conexion fallida al socket');
-      });
-    } catch (error) {
-      console.log(error);
+   if( this.socket === undefined) {
+      try {
+        ws.connect();
+        this.socket = ws.subscribe(canal);
+        this.socket.on('ready', () => {
+          console.log('Conexion exitosa al socket Compras');
+        });
+        this.socket.on('error', () => {
+          console.log('Conexion fallida al socket');
+        });
+        this.socket.on('close', () => {
+          console.log('conexion de socket compras cerrada');
+        });
+      } catch (error) {
+        console.log(error);
+      }
     }
   }
 

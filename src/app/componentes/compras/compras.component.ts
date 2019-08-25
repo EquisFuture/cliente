@@ -11,10 +11,9 @@ import { WscomprasService } from 'src/app/servicios/compras/wscompras.service';
 })
 export class ComprasComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
-    this.wsocket.desconectarws();
   }
   tabla_compras = [];
-  constructor(private servicio: ComprasService, private router: Router, public wsocket: WscomprasService) { 
+  constructor(private servicio: ComprasService, private router: Router, public wsocket: WscomprasService) {
     wsocket.subscripcion('compras');
   }
 

@@ -10,12 +10,13 @@
             <option  *ngFor="let item of proveedores" value={{item.id}}>{{item.nombre_proveedor}}</option>
           </select>
       
-            <button class="col-2 btn btn-primary offset-2 ml-3" data-toggle="modal" data-target="#agregarprovedor">Añadir Proveedor</button>
-            <button class="col-2 btn btn-success ml-3 " data-toggle="modal" data-target="#agregar">Añadir Articulo</button>
+            <button class="col-2 btn btn-primary offset-2 ml-3" data-toggle="modal" data-target="#agregarprovedor"> <li class="fa fa-plus"> </li> Añadir Proveedor</button>
+            <button class="col-2 btn btn-success ml-3 " data-toggle="modal" data-target="#agregar"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Añadir Articulo</button>
         </div>
 </form>
         <div class="row">
-          <button class="btn btn-block btn-outline-success" (click)="registrarCompra()">Registrar Compra</button>
+          <button class="btn col-6  btn-outline-warning" [routerLink]="['/compras']" routerLinkActive="router-link-active"  > <i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Regresar</button>
+          <button class="btn col-6  btn-outline-success"  (click)="registrarCompra()"><i class="fa fa-shopping-bag" aria-hidden="true"></i> Registrar Compra</button>
         </div>
       </div>
      

@@ -31,7 +31,7 @@ export class VentaComponent implements OnInit {
     });
   }
 
-  buscarConcepto(){
+  buscarVentas(){
     if(this.buscar){
       this.ventaService.buscarVentas(this.buscar).subscribe(inv => {
         console.log(inv)
@@ -44,6 +44,11 @@ export class VentaComponent implements OnInit {
       })
     }else{
       this.obtenerVentas();
+    }
+  }
+  onKeydown(event) {
+    if (event.key === "Enter") {
+      this.buscarVentas();
     }
   }
 

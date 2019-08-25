@@ -19,7 +19,7 @@ import { VentaComponent } from './componentes/venta/venta.component';
 
 // compras
 import { ComprasComponent } from './componentes/compras/compras.component';
-import { RegistrarcompraComponent } from './componentes/registrarcompra/registrarcompra.component';
+import { RegistrarcompraComponent } from './componentes/compras/registrarcompra/registrarcompra.component';
 
 const routes: Routes = [
   {path: '', component: LoginComponent, canActivate:[LoginGuard]},

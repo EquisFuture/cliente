@@ -18,7 +18,7 @@ import { InventarioComponent } from './componentes/almacen/inventario/inventario
 
 // compras
 import { ComprasComponent } from './componentes/compras/compras.component';
-import { RegistrarcompraComponent } from './componentes/registrarcompra/registrarcompra.component';
+import { RegistrarcompraComponent } from './componentes/compras/registrarcompra/registrarcompra.component';
 
 // ventas
 import { VentaComponent } from './componentes/venta/venta.component';
@@ -36,8 +36,7 @@ import { VentaComponent } from './componentes/venta/venta.component';
     UsuariosComponent,
     VentaComponent,
     RegistrarcompraComponent,
-    ComprasComponent,
-    
+    ComprasComponent
   ],
   imports: [
     BrowserModule,

@@ -12,8 +12,9 @@ export class VentaComponent implements OnInit {
   venta= new Array<Venta>();
   buscar: string;
   ngOnInit() {
-    let date = Date.now();
-    console.log(date);
+    let date = new Date();
+    
+    console.log('FECHA '+date.getDate() + date.getUTCMonth() + date.getFullYear());
     this.venta = new Array<Venta>();
     this.buscar = "";
 

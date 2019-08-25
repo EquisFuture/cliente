@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule, FormControl } from '@angular/forms';
+import { FormsModule, FormControl, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -17,10 +17,12 @@ import { UsuariosComponent } from './componentes/usuarios/usuarios/usuarios.comp
 import { InventarioComponent } from './componentes/almacen/inventario/inventario.component';
 
 // compras
-
+import { ComprasComponent } from './componentes/compras/compras.component';
+import { RegistrarcompraComponent } from './componentes/registrarcompra/registrarcompra.component';
 
 // ventas
 import { VentaComponent } from './componentes/venta/venta.component';
+
 
 
 @NgModule({
@@ -32,13 +34,17 @@ import { VentaComponent } from './componentes/venta/venta.component';
     MenuAppsComponent,
     LoginComponent,
     UsuariosComponent,
-    VentaComponent
+    VentaComponent,
+    RegistrarcompraComponent,
+    ComprasComponent,
+    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

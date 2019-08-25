@@ -4,7 +4,7 @@ import { Usuario } from '../modelos/Usuario';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+providedIn: "root"
 })
 export class UsuariosService {
 
@@ -26,3 +26,4 @@ export class UsuariosService {
     return this.request.get<Usuario[]>(this.url + 'obtener-usuarios', {headers:headers});
   }
 }
+;

@@ -1,0 +1,161 @@
+<app-navbar></app-navbar>
+
+<div class="container container-fluid mt-3">
+    <h1>Nueva Compra</h1>
+  <div class="content">
+    <form [formGroup]="proveedorSelect">
+        <div class="row" style="margin-top: 40px;">
+            <select formControlName="proveedor" id="proveedorSeleccionado" class="form-control col-6">
+                
+            <option  *ngFor="let item of proveedores" value={{item.id}}>{{item.nombre_proveedor}}</option>
+          </select>
+      
+            <button class="col-2 btn btn-primary offset-2 ml-3" data-toggle="modal" data-target="#agregarprovedor"> <li class="fa fa-plus"> </li> Añadir Proveedor</button>
+            <button class="col-2 btn btn-success ml-3 " data-toggle="modal" data-target="#agregar"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Añadir Articulo</button>
+        </div>
+</form>
+        <div class="row">
+          <button class="btn col-6  btn-outline-warning" [routerLink]="['/compras']" routerLinkActive="router-link-active"  > <i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Regresar</button>
+          <button class="btn col-6  btn-outline-success"  (click)="registrarCompra()"><i class="fa fa-shopping-bag" aria-hidden="true"></i> Registrar Compra</button>
+        </div>
+      </div>
+     
+    </div>
+  <div class="container-fluid">
+    <table class="table table-hover">
+      <thead class="thead-inverse">
+        <tr>
+          <th>Concepto</th>
+          <th>Descripcion</th>
+          <th>Cantidad</th>
+          <th>Udm</th>
+          <th>Precio</th>
+          <th>Accion</th>
+
+
+        </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let art of articulos, let index = index">
+            <td >{{art.concepto}}</td>
+            <td >{{art.descripcion}}</td>
+            <td >{{art.cantidad}}</td>
+            <td >{{art.udm}}</td>
+            <td >${{art.precio}}</td>
+            <td><button (click)="removerArticulo(index)" class="btn btn-danger" style="margin-top: -10px;">Eliminar</button></td>
+            
+          </tr>
+         
+        </tbody>
+    </table>
+  </div>
+
+        
+      
+       
+
+<!-- Formulario de registro -->
+<div class="modal fade" id="agregar" tabindex="-1" role="dialog" aria-labelledby="agregarLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Añadir Articulo</h5>
+              <button id="closeFormaArticulo"  type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form [formGroup]="nuevoArticulo">
+                <div class="form-group">
+                  <label for="compra_registrar">Concepto</label>
+                  <input formControlName="concepto" name="compra_registrar" type="text" class="form-control" id="compra_registrar" required>
+                </div>
+                <div class="form-group">
+                  <label for="descripcion_registrar">Descripción</label>
+                  <input formControlName="descripcion" name="descripcion_registrar" type="text" class="form-control" id="descripcion_registrar" required>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="cantidad_registrar">Cantidad</label>
+                    <input formControlName="cantidad" name="cantidad_registrar" min="1" type="number" class="form-control" id="cantidad_registrar" required>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="udm_registrar">Unidad de medida</label>
+                    <select formControlName="udm"  name="udm_registrar" class="form-control" id="udm_registrar">
+                      <option value="Pieza">Pieza</option>
+                      <option value="Elemento">Elemento</option>
+                      <option value="Servicio">Servicio</option>
+                      <option value="Actividad">Actividad</option>
+                      <option value="Trabajo">Trabajo</option>
+                      <option value="Conjunto">Conjunto</option>
+                      <option value="Metro cuadrado">Metro cuadrado</option>
+                      <option value="Kit (Conjunto de piezas)">Kit (Conjunto de piezas)</option>
+                      <option value="Docena">Docena</option>
+                      <option value="Par">Par</option>
+                      <option value="Lote">Lote</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="precio_lista_registrar">Precio</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <div class="input-group-text">$</div>
+                      </div>
+                      <input formControlName="precio" name="precio_lista_registrar" type="number" min="1" class="form-control" id="precio_lista_registrar" required>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-warning text-white" data-dismiss="modal">Cancelar</button>
+              <button type="button" class="btn btn-success" (click)="agregarArticulo()" data-dismiss="modal" [disabled]="nuevoArticulo.invalid">Registrar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Formulario de provedores -->
+<div class="modal fade" id="agregarprovedor" tabindex="-1" role="dialog" aria-labelledby="agregarLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Añadir provedor</h5>
+        <button id="closeProveedorModal" type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="nuevoProveedor" >
+          <div class="form-group">
+            <label for="nombre_proveedor">Proveedor</label>
+            <input formControlName="nombre_proveedor" name="nombre_proveedor" type="text" class="form-control" id="nombre_proveedor" required>
+          </div>
+          <div class="form-group">
+            <label for="direccion_proveedor">Direccion</label>
+            <input formControlName="direccion"  name="direccion_proveedor" type="text" class="form-control" id="direccion_proveedor" required>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="telefono_proveedor">Telefono</label>
+              <input formControlName="telefono" name="telefono_proveedor" min="1" type="text" class="form-control" id="telefono_proveedor" required>
+            </div>
+              <div class="form-group ">
+                <label for="correo_proveedor">Correo</label>
+                <input formControlName="correo" name="correo_proveedor" type="email"  class="form-control" id="correo_proveedor" required>
+              </div>
+          </div>
+         
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning text-white" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-success" data-dismiss="modal" [disabled]="nuevoProveedor.invalid" (click)="registrarProveedor()">Registrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+    

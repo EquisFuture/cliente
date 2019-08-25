@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ComprasService } from 'src/app/servicios/compras/compras.service';
 import { Router } from '@angular/router';
 import { Compra } from 'src/app/modelos/compra';
-
 @Component({
   selector: 'app-compras',
   templateUrl: './compras.component.html',

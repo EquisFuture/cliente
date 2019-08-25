@@ -8,7 +8,7 @@ import { Venta } from 'src/app/modelos/Venta'
 })
 export class VentaComponent implements OnInit {
 
-  constructor(private ventaService:VentasService) {}
+  constructor(private ventaService: VentasService) {}
   venta= new Array<Venta>();
   buscar: string;
   ngOnInit() {

@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import Ws from '@adonisjs/websocket-client';
 
 @Component({
   selector: 'app-root',

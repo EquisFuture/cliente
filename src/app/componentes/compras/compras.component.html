@@ -2,21 +2,14 @@
 
 <div class="container container-fluid mt-3">
     <h1>Compras</h1>
-<<<<<<< HEAD
+
   <div class="content">
         <div class="row" style="margin-top: 40px;">
             <input [(ngModel)]="buscar" name="buscar" class="form-control col-6" type="search" placeholder="Buscar" aria-label="Search" (keydown)="onKeydown($event)">
             <button  class="btn btn-primary col-1" type="submit"><i class="fa fa-search"></i></button>
             <button class="col-2 btn btn-primary offset-2 ml-3"  [routerLink]="['/registrarcompra']">Añadir </button>
 
-=======
   
-        <div class="row" style="margin-top: 30px;">
-            <input name="buscar" class="form-control col-6" type="search" placeholder="Buscar" aria-label="Search" (keydown)="onKeydown($event)">
-            <button  class="btn btn-primary col-1" type="submit"><i class="fa fa-search"></i></button>
-            <button class="col-2 btn btn-success offset-3" (click)="printTabla()" data-toggle="modal" data-target="#agregar">Añadir</button>
->>>>>>> cf93abc128a1d43226dd4c797be3848975b31bcf
-        </div>
       </div>
   
     <div class="row">

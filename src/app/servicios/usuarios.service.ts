@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpErrorResponse} from '@angular/common/http';
 import { Usuario } from '../modelos/Usuario';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -18,5 +19,10 @@ export class UsuariosService {
   iniciarSesion(email: string, password: string){
     let headers = new HttpHeaders().set('Content-Type','application/json');
     return this.request.post(this.url+"login", {email: email, password: password}, {headers:headers});
+  }
+
+  obtenerUsuarios(): Observable<Usuario[]>{
+    let headers = new HttpHeaders().set('Content-Type','application/json').set('auth',localStorage.getItem('token'));
+    return this.request.get<Usuario[]>(this.url + 'obtener-usuarios', {headers:headers});
   }
 }

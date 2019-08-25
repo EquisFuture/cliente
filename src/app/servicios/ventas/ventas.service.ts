@@ -4,6 +4,7 @@ import Ws from '@adonisjs/websocket-client';
 import { Observable,BehaviorSubject } from 'rxjs';
 import {Venta} from 'src/app/modelos/Venta'
 const ws = Ws('ws://localhost:3333')
+
 @Injectable({
   providedIn: 'root'
 })
@@ -45,9 +46,8 @@ export class VentasService {
   obtenerVentas():Observable<Venta[]>{
     let headers = new HttpHeaders().set('Content-Type','application/json');
     return this.request.get<Venta[]>(this.url +'obtener-ventas', {headers:headers});
-
-    
   }
+  
   obtenerClientes():Observable<Venta[]>{
     let headers = new HttpHeaders().set('Content-Type','application/json');
     return this.request.get<Venta[]>(this.url +'obtener-ventas', {headers:headers});

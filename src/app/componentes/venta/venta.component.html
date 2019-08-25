@@ -5,7 +5,7 @@
 <!-- Menú de búsqueda -->
 <div class="row" style="margin-top: 30px;">
     <input [(ngModel)]="buscar" name="buscar" class="form-control col-6" type="search" placeholder="Buscar" aria-label="Search" (keydown)="onKeydown($event)">
-    <button (click)="buscarConcepto()" class="btn btn-primary col-1" type="submit"><i class="fa fa-search"></i></button>
+    <button (click)="buscarVenta()" class="btn btn-primary col-1" type="submit"><i class="fa fa-search"></i></button>
     <button class="col-2 btn btn-success offset-3" data-toggle="modal" data-target="#agregar">Añadir</button>
 </div>
 
@@ -49,8 +49,8 @@
         <div class="modal-body">
           <form>
             <div class="form-group">
-              <label for="concepto_registrar">Cliente</label>
-              <input [(ngModel)]="cliente_registrar" name="cliente_registrar" type="text" class="form-control" id="concepto_registrar" required>
+              <label for="cliente_registrar">Cliente</label>
+              <input [(ngModel)]="cliente_registrar" name="cliente_registrar" type="text" class="form-control" id="cliente_registrar" required>
             </div>
 
             <div class="form-group">
@@ -63,7 +63,12 @@
                 <input [(ngModel)]="cantidad_registrar" name="cantidad_registrar" min="1" type="number" class="form-control" id="cantidad_registrar" required>
               </div>
             </div>
-           
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="concepto_registrar">Concepto</label>
+                <input [(ngModel)]="concepto_registrar" name="concepto_registrar" min="1" type="number" class="form-control" id="concepto_registrar" required>
+              </div>
+            </div>
           </form>
         </div>
         <div class="modal-footer">

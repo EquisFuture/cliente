@@ -66,7 +66,7 @@ export class InventarioService {
   // métodos para el inventario
   url: string = 'http://localhost:3333/';
   obtenerInventario(): Observable<Concepto[]>{
-    let headers = new HttpHeaders().set('Content-Type','application/json');
+    let headers = new HttpHeaders().set('Content-Type','application/json').set('auth',localStorage.getItem('token'));
     return this.request.get<Concepto[]>(this.url +'obtener-inventario', {headers:headers});
   }
 
@@ -77,12 +77,12 @@ export class InventarioService {
 
   buscarConcepto(concepto: string): Observable<Concepto[]>{
     let json = {concepto: concepto};
-    let headers = new HttpHeaders().set('Content-Type','application/json');
+    let headers = new HttpHeaders().set('Content-Type','application/json').set('auth',localStorage.getItem('token'));
     return this.request.get<Concepto[]>(this.url +'buscar-inventario', {headers:headers, params: json});
   }
 
   editarConcepto(concepto): Observable<Concepto[]>{
-    let headers = new HttpHeaders().set('Content-Type','application/json');
+    let headers = new HttpHeaders().set('Content-Type','application/json').set('auth',localStorage.getItem('token'));
     return this.request.post<Concepto[]>(this.url +'editar-concepto', concepto, {headers:headers});
   }
 }

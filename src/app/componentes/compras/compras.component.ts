@@ -15,10 +15,11 @@ export class ComprasComponent implements OnInit, OnDestroy {
   tabla_compras = [];
   buscar: string;
   constructor(private servicio: ComprasService, private router: Router, public wsocket: WscomprasService) {
-    wsocket.subscripcion('compras');
   }
 
   ngOnInit() {
+    this.wsocket.subscripcion('compras');
+
     this.getTabla();
     this.wsocket.getSocket().on('actualizarCompras', () => {
       this.getTabla();

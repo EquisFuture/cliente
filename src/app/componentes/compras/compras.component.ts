@@ -1,16 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ComprasService } from 'src/app/servicios/compras/compras.service';
 import { Router } from '@angular/router';
 import { Compra } from 'src/app/modelos/compra';
+import { WscomprasService } from 'src/app/servicios/compras/wscompras.service';
+
 @Component({
   selector: 'app-compras',
   templateUrl: './compras.component.html',
   styleUrls: ['./compras.component.css']
 })
-export class ComprasComponent implements OnInit {
-
+export class ComprasComponent implements OnInit, OnDestroy {
+  ngOnDestroy(): void {
+    this.wsocket.desconectarws();
+  }
   tabla_compras = [];
-  constructor(private servicio: ComprasService, private router: Router) { }
+  constructor(private servicio: ComprasService, private router: Router, public wsocket: WscomprasService) { 
+    wsocket.subscripcion('compras');
+  }
 
   ngOnInit() {
     this.getTabla();
@@ -30,6 +36,14 @@ export class ComprasComponent implements OnInit {
       });
       console.log(r);
       this.tabla_compras = r;
+    });
+  }
+
+  printTabla() {
+    console.log(JSON.stringify(this.tabla_compras));
+    let tabla = JSON.parse(JSON.stringify(this.tabla_compras));
+    tabla.forEach(element => {
+      console.log('registro: ' + element.id + " "+ element.costo_total);
     });
   }
 

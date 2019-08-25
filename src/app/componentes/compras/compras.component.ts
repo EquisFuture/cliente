@@ -19,6 +19,9 @@ export class ComprasComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.getTabla();
+    this.wsocket.getSocket().on('actualizarCompras', () => {
+      this.getTabla();
+    });
   }
 
   getTabla(){

@@ -49,6 +49,9 @@ export class WscomprasService {
     }
   }
 
+  traerSubscripcion(canal: string) {
+    return this.socket = ws.getSubscription(canal);
+  }
   getSocket(): Ws {
     return this.socket;
   }

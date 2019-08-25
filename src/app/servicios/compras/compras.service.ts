@@ -1,8 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
-import Ws from '@adonisjs/websocket-client';
-
-const ws = Ws('ws://localhost:3333');
 
 
 @Injectable({
@@ -11,6 +8,7 @@ const ws = Ws('ws://localhost:3333');
 export class ComprasService {
 
   private url = 'http://localhost:3333/';
+
 
   constructor(private http: HttpClient) { }
 
@@ -24,11 +22,4 @@ export class ComprasService {
     return this.http.get(this.url + link);
   }
 
-  conectarws() {
-    try {
-      ws.connect();
-    } catch (error) {
-      console.log(error);
-    }
-  }
 }

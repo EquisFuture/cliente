@@ -13,6 +13,7 @@ export class ComprasComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
   }
   tabla_compras = [];
+  buscar: string;
   constructor(private servicio: ComprasService, private router: Router, public wsocket: WscomprasService) {
     wsocket.subscripcion('compras');
   }
@@ -47,6 +48,14 @@ export class ComprasComponent implements OnInit, OnDestroy {
     tabla.forEach(element => {
       console.log('registro: ' + element.id + " "+ element.costo_total);
     });
+  }
+  onKeydown(event){
+    if(event.key === 'Enter'){
+      this.buscador(this.buscar);
+    }
+  }
+  buscador(keyword: string){
+    
   }
 
 }

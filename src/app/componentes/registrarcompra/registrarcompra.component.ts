@@ -65,9 +65,9 @@ export class RegistrarcompraComponent implements OnInit, OnDestroy {
       this.servicio.post('registrar-proveedor', pro).subscribe(r => {
         console.log(r);
       });
-      this.wsocket.getSocket().emit('nuevoProveedor');
       this.nuevoProveedor.reset();
       window.document.getElementById('closeProveedorModal').click();
+      this.wsocket.getSocket().emit('nuevoProveedor');
      
 
     } catch (error) {
@@ -92,16 +92,26 @@ export class RegistrarcompraComponent implements OnInit, OnDestroy {
 
 
   registrarCompra() {
-    let pro = this.proveedorSelect.controls.proveedor.value;
-    let compra_json = {costo_total: 10, proveedor: pro, listado: this.articulos};
-    this.servicio.post('registrar-compra', compra_json).subscribe(response => {
-      console.log(response);
-    });
-    this.router.navigate(['compras']);
-    this.wsocket.getSocket().emit('nuevaCompra');
+
+    let costo = 0;
+    let importe = 0;
+    if(this.articulos.length > 0) {
+      this.articulos.forEach(element => {
+        importe = element.cantidad * element.precio;
+        costo = costo + importe;
+      });
+      let pro = this.proveedorSelect.controls.proveedor.value;
+      let compra_json = {costo_total: costo, proveedor: pro, listado: this.articulos};
+      this.servicio.post('registrar-compra', compra_json).subscribe(response => {
+        console.log(response);
+      });
+      this.router.navigate(['compras']);
+      this.wsocket.getSocket().emit('nuevaCompra');
+    } else {
+      alert('Debes agregar al menos un articulo a la compra.');
+    }
   }
   removerArticulo(index: number) {
     this.articulos.splice(index, 1);
-    
   }
 }

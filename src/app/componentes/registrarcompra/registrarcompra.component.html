@@ -110,7 +110,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-warning text-white" data-dismiss="modal">Cancelar</button>
-              <button type="button" class="btn btn-success" (click)="agregarArticulo()" data-dismiss="modal">Registrar</button>
+              <button type="button" class="btn btn-success" (click)="agregarArticulo()" data-dismiss="modal" [disabled]="nuevoArticulo.invalid">Registrar</button>
             </div>
           </div>
         </div>

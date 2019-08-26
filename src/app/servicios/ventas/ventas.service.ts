@@ -64,9 +64,17 @@ export class VentasService {
       ws.getSubscription('ventas').emit('actualizar', ventas);
     }catch(e){ console.log(e); }
   }
+  post(link: string, json: any){
+    let data = JSON.stringify(json);
+    let headers = new HttpHeaders().set('Content-type','Application/json').set('auth', localStorage.getItem('token'));
 
+    return this.request.post(this.url+link,data,{'headers': headers});
+  }
   actualizarVentas(venta){
     console.log(venta);
     this.ventas.next(venta);
+  }
+  get(link:string){
+    return this.request.get(this.url + link);
   }
 }

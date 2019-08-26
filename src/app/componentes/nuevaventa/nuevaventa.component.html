@@ -1,14 +1,14 @@
 <app-navbar></app-navbar>
 
 <div class="container container-fluid mt-3">
-    <h1>Nueva Compra</h1>
+    <h1>Nueva Venta</h1>
   <div class="content">
     <form [formGroup]="proveedorSelect">
         <div class="row" style="margin-top: 40px;">
             <select formControlName="proveedor" id="proveedorSeleccionado" class="form-control col-6">
-            <option  *ngFor="let item of proveedores" value={{item.id}}>{{item.nombre_proveedor}}</option>
+            <option  *ngFor="let item of proveedores" value={{item.id}}>{{item.nombre_cliente}}</option>
           </select>
-            <button class="col-2 btn btn-primary offset-2 ml-3" data-toggle="modal" data-target="#agregarprovedor"> <li class="fa fa-plus"> </li> Añadir Proveedor</button>
+            <button class="col-2 btn btn-primary offset-2 ml-3" data-toggle="modal" data-target="#agregarprovedor"> <li class="fa fa-plus"> </li> Añadir Cliente</button>
             <button class="col-2 btn btn-success ml-3 " data-toggle="modal" data-target="#agregar"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Añadir Articulo</button>
         </div>
 </form>
@@ -25,9 +25,9 @@
           <th>Concepto</th>
           <th>Descripcion</th>
           <th>Cantidad</th>
-          <th>Udm</th>
           <th>Precio</th>
           <th>Accion</th>
+          <th>Fecha</th>
         </tr>
         </thead>
         <tbody>
@@ -35,20 +35,15 @@
             <td >{{art.concepto}}</td>
             <td >{{art.descripcion}}</td>
             <td >{{art.cantidad}}</td>
-            <td >{{art.udm}}</td>
             <td >${{art.precio}}</td>
+            <td>{{art.fecha}}</td>
             <td><button (click)="removerArticulo(index)" class="btn btn-danger" style="margin-top: -10px;">Eliminar</button></td>
-            
           </tr>
-         
         </tbody>
     </table>
   </div>
 
         
-      
-       
-
 <!-- Formulario de registro -->
 <div class="modal fade" id="agregar" tabindex="-1" role="dialog" aria-labelledby="agregarLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -73,22 +68,6 @@
                   <div class="form-group col-md-6">
                     <label for="cantidad_registrar">Cantidad</label>
                     <input formControlName="cantidad" name="cantidad_registrar" min="1" type="number" class="form-control" id="cantidad_registrar" required>
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label for="udm_registrar">Unidad de medida</label>
-                    <select formControlName="udm"  name="udm_registrar" class="form-control" id="udm_registrar">
-                      <option value="Pieza">Pieza</option>
-                      <option value="Elemento">Elemento</option>
-                      <option value="Servicio">Servicio</option>
-                      <option value="Actividad">Actividad</option>
-                      <option value="Trabajo">Trabajo</option>
-                      <option value="Conjunto">Conjunto</option>
-                      <option value="Metro cuadrado">Metro cuadrado</option>
-                      <option value="Kit (Conjunto de piezas)">Kit (Conjunto de piezas)</option>
-                      <option value="Docena">Docena</option>
-                      <option value="Par">Par</option>
-                      <option value="Lote">Lote</option>
-                    </select>
                   </div>
                 </div>
                 <div class="form-row">
@@ -118,7 +97,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Añadir provedor</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Añadir Cliente</h5>
         <button id="closeProveedorModal" type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -126,7 +105,7 @@
       <div class="modal-body">
         <form [formGroup]="nuevoProveedor" >
           <div class="form-group">
-            <label for="nombre_proveedor">Proveedor</label>
+            <label for="nombre_proveedor">Cliente</label>
             <input formControlName="nombre_proveedor" name="nombre_proveedor" type="text" class="form-control" id="nombre_proveedor" required>
           </div>
           <div class="form-group">

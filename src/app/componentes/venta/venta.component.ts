@@ -46,6 +46,7 @@ export class VentaComponent implements OnInit {
       this.obtenerVentas();
     }
   }
+  
   onKeydown(event) {
     if (event.key === "Enter") {
       this.buscarVentas();

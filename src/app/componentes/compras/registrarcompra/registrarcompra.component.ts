@@ -74,10 +74,10 @@ export class RegistrarcompraComponent implements OnInit, OnDestroy {
       pro.correo = this.nuevoProveedor.controls.correo.value;
       this.servicio.post('registrar-proveedor', pro).subscribe(r => {
         console.log(r);
-        this.nuevoProveedor.reset();
-        window.document.getElementById('closeProveedorModal').click();
         this.wsocket.getSocket().emit('nuevoProveedor');
       });
+      this.nuevoProveedor.reset();
+      window.document.getElementById('closeProveedorModal').click();
     } catch (error) {
       console.log(error);
     }
@@ -112,14 +112,21 @@ export class RegistrarcompraComponent implements OnInit, OnDestroy {
       let compra_json = {costo_total: costo, proveedor: pro, listado: this.articulos};
       this.servicio.post('registrar-compra', compra_json).subscribe(response => {
         console.log(response);
-        this.router.navigate(['compras']);
         this.wsocket.getSocket().emit('nuevaCompra');
       });
+      this.router.navigate(['compras']);
     } else {
       alert('Debes agregar al menos un articulo a la compra.');
     }
   }
   removerArticulo(index: number) {
     this.articulos.splice(index, 1);
+  }
+  onKeydown(event) {
+    if (event.key === 'Enter') {
+      if (this.nuevoArticulo.valid) {
+        this.agregarArticulo();
+      }
+    }
   }
 }

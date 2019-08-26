@@ -68,16 +68,16 @@
               <form [formGroup]="nuevoArticulo">
                 <div class="form-group">
                   <label for="compra_registrar">Concepto</label>
-                  <input formControlName="concepto" name="compra_registrar" type="text" class="form-control" id="compra_registrar" required>
+                  <input formControlName="concepto" (keydown)="onKeydown($event)"  name="compra_registrar" type="text" class="form-control" id="compra_registrar" required>
                 </div>
                 <div class="form-group">
                   <label for="descripcion_registrar">Descripción</label>
-                  <input formControlName="descripcion" name="descripcion_registrar" type="text" class="form-control" id="descripcion_registrar" required>
+                  <input formControlName="descripcion" (keydown)="onKeydown($event)"  name="descripcion_registrar" type="text" class="form-control" id="descripcion_registrar" required>
                 </div>
                 <div class="form-row">
                   <div class="form-group col-md-6">
                     <label for="cantidad_registrar">Cantidad</label>
-                    <input formControlName="cantidad" name="cantidad_registrar" min="1" type="number" class="form-control" id="cantidad_registrar" required>
+                    <input formControlName="cantidad" (keydown)="onKeydown($event)"  name="cantidad_registrar" min="1" type="number" class="form-control" id="cantidad_registrar" required>
                   </div>
                   <div class="form-group col-md-6">
                     <label for="udm_registrar">Unidad de medida</label>
@@ -103,7 +103,7 @@
                       <div class="input-group-prepend">
                         <div class="input-group-text">$</div>
                       </div>
-                      <input formControlName="precio" name="precio_lista_registrar" type="number" min="1" class="form-control" id="precio_lista_registrar" required>
+                      <input formControlName="precio" (keydown)="onKeydown($event)" name="precio_lista_registrar" type="number" min="1" class="form-control" id="precio_lista_registrar" required>
                     </div>
                   </div>
                 </div>

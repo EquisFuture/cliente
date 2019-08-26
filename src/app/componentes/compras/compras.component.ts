@@ -81,11 +81,23 @@ export class ComprasComponent implements OnInit, OnDestroy {
   }
 
   buscarFolioCompra(folio: any) {
+      this.b_compra = new Array<ArticuloCompra>();
     
 
       this.servicio.get('buscar-compra/' + folio).subscribe( (compras_r: ArticuloCompra[] ) => {
-        console.log(compras_r);
-        this.b_compra = compras_r;
+        console.log(compras_r.length);
+        if (compras_r.length < 1){
+          const articuloDefasults = new ArticuloCompra();
+          articuloDefasults.concepto = 'N/A';
+          articuloDefasults.descripcion = 'N/A';
+          articuloDefasults.cantidad = 0;
+          articuloDefasults.udm = 'N/A';
+          articuloDefasults.precio = 0;
+          this.b_compra.push(articuloDefasults);
+        } else {
+
+          this.b_compra = compras_r;
+        }
       });
   
   }

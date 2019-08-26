@@ -1,5 +1,12 @@
 <app-navbar></app-navbar>
 <div class="container">
+  <!-- Menú de búsqueda -->
+<div class="row" style="margin-top: 30px;">
+  <input [(ngModel)]="buscar" name="buscar" class="form-control col-6" type="search" placeholder="Buscar" aria-label="Search" (keydown)="onKeydown($event)">
+  <button (click)="buscarConcepto()" class="btn btn-primary col-1" type="submit"><i class="fa fa-search"></i></button>
+  <button class="col-2 btn btn-success offset-3" data-toggle="modal" data-target="#agregar">Añadir</button>
+</div>
+
     <table class="table table-hover">
         <thead>
           <tr>
@@ -16,8 +23,95 @@
             <td>{{ usuario.username }}</td>
             <td>{{ usuario.email }}</td>
             <td>{{ usuario.rol }}</td>
-            <td><button class="btn btn-info btn-block" data-toggle="modal" data-target="#editar">Editar</button></td>
+            <td><button class="btn btn-info btn-block" data-toggle="modal" data-target="#editar" (click)="seleccionarUsuario(usuario)">Editar</button></td>
           </tr>
         </tbody>
       </table>
+</div>
+
+<!-- Formulario de registro -->
+<div class="modal fade" id="agregar" tabindex="-1" role="dialog" aria-labelledby="agregarLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Añadir Usuario</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="cerrar_añadir">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="username">Nombre de usuario</label>
+            <input [(ngModel)]="username" name="username" type="text" class="form-control" id="username" required>
+          </div>
+          <div class="form-group">
+            <label for="email">correo</label>
+            <input [(ngModel)]="email" name="email" type="text" class="form-control" id="email" required>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="password">Contraseña</label>
+              <input [(ngModel)]="password" name="password" min="1" type="password" class="form-control" id="password" required>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="password">Repetir contraseña</label>
+                <input [(ngModel)]="password2" name="password2" min="1" type="password" class="form-control" id="password2" required>
+              </div>
+          </div>
+          <div class="form-group">
+              <label for="rol">Rol</label>
+              <select [(ngModel)]="rol" name="rol" class="form-control" id="rol">
+                <option value="Usuario" selected>Usuario</option>
+                <option value="Admin">Admin</option>
+                <option value="Servicio">Servicio</option>
+              </select>
+            </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning text-white" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-success" (click)="registrarUsuario()">Registrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Formulario de edición -->
+<div class="modal fade" id="editar" tabindex="-1" role="dialog" aria-labelledby="editarLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Editar Usuario</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="cerrar_editar">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="username_editar">Nombre de usuario</label>
+            <input [(ngModel)]="username_editar" name="username_editar" type="text" class="form-control" id="username_editar" required value="{{ usuario_editar?.username }}">
+          </div>
+          <div class="form-group">
+            <label for="email_editar">Correo</label>
+            <input [(ngModel)]="email_editar" name="email_editar" type="text" class="form-control" id="email_editar" required value="{{ usuario_editar?.email }}">
+          </div>
+          
+          <div class="form-group">
+            <label for="rol_editar">Rol</label>
+            <select [(ngModel)]="rol_editar" name="rol_editar" class="form-control" id="rol_editar">
+              <option value="Usuario" selected>Usuario</option>
+              <option value="Admin">Admin</option>
+              <option value="Servicio">Servicio</option>
+            </select>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning text-white" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-success" (click)="editarUsuario()">Guardar</button>
+      </div>
+    </div>
+  </div>
 </div>

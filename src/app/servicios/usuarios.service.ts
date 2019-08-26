@@ -85,5 +85,11 @@ export class UsuariosService {
     let headers = new HttpHeaders().set('Content-Type','application/json').set('auth',localStorage.getItem('token'));
     return this.request.post(this.url + 'editar-usuario', usuario, {headers:headers});
   }
+
+  buscarUsuario(username: string): Observable<Usuario[]>{
+    let json = {username: username};
+    let headers = new HttpHeaders().set('Content-Type','application/json').set('auth',localStorage.getItem('token'));
+    return this.request.get<Usuario[]>(this.url +'buscar-usuario', {headers:headers, params: json});
+  }
 }
 ;

@@ -26,15 +26,14 @@ export class UsuariosComponent implements OnInit, OnDestroy {
 
   usuarios: Array<Usuario>;
   usuario_editar: Usuario;
+  buscar: string;
   ngOnInit() {
     this.usuarios = new Array<Usuario>();
     this.usuario_editar = new Usuario;
 
     this.usuariosService.conectar();
 
-    this.usuariosService.obtenerUsuarios().subscribe(usuarios=>{
-      this.usuariosService.enviarUsuarios(usuarios);
-    });
+    this.obtenerUsuarios();
 
     this.usuariosService.lista_usuarios.subscribe(usuarios => {
       this.usuarios = usuarios;
@@ -50,6 +49,12 @@ export class UsuariosComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.usuariosService.cerrarConexion();
+  }
+
+  obtenerUsuarios(){
+    this.usuariosService.obtenerUsuarios().subscribe(usuarios=>{
+      this.usuariosService.enviarUsuarios(usuarios);
+    });
   }
 
   registrarUsuario(){
@@ -77,6 +82,27 @@ export class UsuariosComponent implements OnInit, OnDestroy {
       });
     }else{
       alert('Revise su información.');
+    }
+  }
+
+  buscarUsuario(){
+    if(this.buscar){
+      this.usuariosService.buscarUsuario(this.buscar).subscribe(usuarios => {
+        if(usuarios.length != 0){
+          this.usuariosService.enviarUsuarios(usuarios)
+        }
+        else{
+          alert('no se encontró un usuario con ese nombre o correo.');
+        }
+      })
+    }else{
+      this.obtenerUsuarios();
+    }
+  }
+
+  onKeydown(event) {
+    if (event.key === "Enter") {
+      this.buscarUsuario();
     }
   }
 }

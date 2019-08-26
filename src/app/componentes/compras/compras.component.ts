@@ -78,6 +78,25 @@ export class ComprasComponent implements OnInit, OnDestroy {
   filtrar() {
     console.log('inicio: ' + this.f_inicio);
     console.log('fin: ' + this.f_fin);
+
+    if( this.f_inicio === undefined || this.f_inicio.length < 5){
+      this.getTabla();
+    } else {
+      this.servicio.get('filtrar/'+this.f_inicio+'/'+this.f_fin).subscribe( (r: Compra[]) => {
+        r.forEach(element => {
+          this.servicio.get('buscar-usuario/'+element.autoriza).subscribe(us =>{
+            let temp = JSON.parse(JSON.stringify(us));
+            element.autoriza = temp.usuario;
+          });
+          this.servicio.get('buscar-proveedor/'+element.proveedor).subscribe(pro =>{
+            let temp = JSON.parse(JSON.stringify(pro));
+            element.proveedor = temp.proveedor;
+          });
+        });
+        console.log(r);
+        this.tabla_compras = r;
+      });
+    }
   }
 
   buscarFolioCompra(folio: any) {

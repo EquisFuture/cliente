@@ -5,6 +5,7 @@ import { WscomprasService } from 'src/app/servicios/compras/wscompras.service';
 import { Proveedor } from 'src/app/modelos/proveedor';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ArticuloCompra } from 'src/app/modelos/articulo-compra';
+import { InventarioService } from 'src/app/servicios/almacen/inventario.service';
 @Component({
   selector: 'app-registrarcompra',
   templateUrl: './registrarcompra.component.html',
@@ -15,7 +16,7 @@ export class RegistrarcompraComponent implements OnInit, OnDestroy {
   public nuevoArticulo: FormGroup;
   public proveedorSelect: FormGroup;
 
-  constructor(private servicio: ComprasService, private router: Router, private wsocket: WscomprasService) {
+  constructor(private servicio: ComprasService, private router: Router, private wsocket: WscomprasService, private inventarioService: InventarioService) {
     try {
       this.wsocket.traerSubscripcion('compras').close();
     } catch (error) {
@@ -113,6 +114,7 @@ export class RegistrarcompraComponent implements OnInit, OnDestroy {
       this.servicio.post('registrar-compra', compra_json).subscribe(response => {
         console.log(response);
         this.wsocket.getSocket().emit('nuevaCompra');
+        this.actualizarInventario();
       });
       this.router.navigate(['compras']);
     } else {
@@ -128,5 +130,13 @@ export class RegistrarcompraComponent implements OnInit, OnDestroy {
         this.agregarArticulo();
       }
     }
+  }
+
+  actualizarInventario(){
+    this.inventarioService.conectar();
+    this.inventarioService.obtenerInventario().subscribe(inventario => {
+      this.inventarioService.enviarInventario(inventario);
+    });
+    this.inventarioService.cerrarConexion();
   }
 }

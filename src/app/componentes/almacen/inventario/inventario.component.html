@@ -44,7 +44,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Añadir Concepto</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="cerrar_añadir">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
@@ -104,7 +104,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-warning text-white" data-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-success" (click)="registrarConcepto()" data-dismiss="modal">Registrar</button>
+          <button type="button" class="btn btn-success" (click)="registrarConcepto()">Registrar</button>
         </div>
       </div>
     </div>
@@ -116,7 +116,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Editar Concepto</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="cerrar_editar">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -172,7 +172,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-warning text-white" data-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-success" (click)="editarConcepto()" data-dismiss="modal">Guardar</button>
+        <button type="button" class="btn btn-success" (click)="editarConcepto()">Guardar</button>
       </div>
     </div>
   </div>

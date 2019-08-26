@@ -15,11 +15,12 @@ import { InventarioComponent } from './componentes/almacen/inventario/inventario
 
 // ventas
 import { VentaComponent } from './componentes/venta/venta.component';
+import { NuevaventaComponent } from './componentes/nuevaventa/nuevaventa.component';
 
 
 // compras
 import { ComprasComponent } from './componentes/compras/compras.component';
-import { RegistrarcompraComponent } from './componentes/registrarcompra/registrarcompra.component';
+import { RegistrarcompraComponent } from './componentes/compras/registrarcompra/registrarcompra.component';
 
 const routes: Routes = [
   {path: '', component: LoginComponent, canActivate:[LoginGuard]},
@@ -29,6 +30,7 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent, canActivate:[LoginGuard]},
   {path: 'usuarios', component: UsuariosComponent, canActivate:[AuthGuard]},
   {path: 'registrarcompra', component: RegistrarcompraComponent, canActivate:[AuthGuard]},
+  {path: 'nuevaventa', component: NuevaventaComponent},
   {path: 'compras', component: ComprasComponent, canActivate:[AuthGuard]},   
   {path: '**', redirectTo: '' }
 ];

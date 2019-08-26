@@ -16,11 +16,11 @@ export class RegistrarcompraComponent implements OnInit, OnDestroy {
   public proveedorSelect: FormGroup;
 
   constructor(private servicio: ComprasService, private router: Router, private wsocket: WscomprasService) {
-    // try {
-    //   this.wsocket.traerSubscripcion('compras').close();
-    // } catch (error) {
-    //   console.log(error);
-    // }
+    try {
+      this.wsocket.traerSubscripcion('compras').close();
+    } catch (error) {
+      console.log(error);
+    }
     this.nuevoProveedor = new FormBuilder().group({
       nombre_proveedor: ['', Validators.required],
       direccion: ['', Validators.required],
@@ -42,15 +42,15 @@ export class RegistrarcompraComponent implements OnInit, OnDestroy {
   proveedores = new Array<Proveedor>();
   articulos = new Array<ArticuloCompra>();
   ngOnDestroy(): void {
-    this.wsocket.desconectarws('compras');
+    this.wsocket.desconectarws('compras:registro');
   }
 
   ngOnInit() {
     this.getProveedores();
     this.proveedorSelect.controls.proveedor.setValue(1);
     try {
-      this.wsocket.subscripcion('compras');
-      this.wsocket.traerSubscripcion('compras').on('actualizarProveedores', () => {
+      this.wsocket.subscripcion('compras:registro');
+      this.wsocket.traerSubscripcion('compras:registro').on('actualizarProveedores', () => {
         this.getProveedores();
       });
     } catch (error) {

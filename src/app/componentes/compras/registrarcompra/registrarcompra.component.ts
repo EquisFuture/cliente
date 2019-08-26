@@ -113,6 +113,7 @@ export class RegistrarcompraComponent implements OnInit, OnDestroy {
       this.servicio.post('registrar-compra', compra_json).subscribe(response => {
         console.log(response);
         this.wsocket.getSocket().emit('nuevaCompra');
+        this.actualizarInventario();
       });
       this.router.navigate(['compras']);
     } else {
@@ -128,5 +129,9 @@ export class RegistrarcompraComponent implements OnInit, OnDestroy {
         this.agregarArticulo();
       }
     }
+  }
+
+  actualizarInventario(){
+    //
   }
 }

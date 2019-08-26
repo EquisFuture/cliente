@@ -11,22 +11,32 @@ import { WscomprasService } from 'src/app/servicios/compras/wscompras.service';
 })
 export class ComprasComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
+    this.wsocket.desconectarws('compras');
   }
   tabla_compras = [];
   buscar: string;
   constructor(private servicio: ComprasService, private router: Router, public wsocket: WscomprasService) {
+  //  try {
+  //    this.wsocket.traerSubscripcion('compras').close();
+  //  } catch (error) {
+  //    console.log(error);
+  //  }
   }
 
   ngOnInit() {
-    this.wsocket.subscripcion('compras');
-
     this.getTabla();
-    this.wsocket.getSocket().on('actualizarCompras', () => {
-      this.getTabla();
-    });
+    try {
+      this.wsocket.subscripcion('compras');
+      this.wsocket.traerSubscripcion('compras').on('actualizarCompras', () => {
+        this.getTabla();
+      });
+
+    } catch (error) {
+      console.log(error);
+    }
   }
 
-  getTabla(){
+  getTabla() {
     this.servicio.get('compras').subscribe((r: Compra[]) => {
       r.forEach(element => {
         this.servicio.get('buscar-usuario/'+element.autoriza).subscribe(us =>{

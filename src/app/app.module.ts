@@ -36,8 +36,7 @@ import { VentaComponent } from './componentes/venta/venta.component';
     UsuariosComponent,
     VentaComponent,
     RegistrarcompraComponent,
-    ComprasComponent,
-    
+    ComprasComponent
   ],
   imports: [
     BrowserModule,

@@ -51,6 +51,7 @@ export class RegistrarcompraComponent implements OnInit, OnDestroy {
   getProveedores() {
     this.servicio.get('proveedores').subscribe( (r: Proveedor []) => {
      this.proveedores = r;
+     console.log(r)
     });
   }
 
@@ -64,10 +65,10 @@ export class RegistrarcompraComponent implements OnInit, OnDestroy {
   
       this.servicio.post('registrar-proveedor', pro).subscribe(r => {
         console.log(r);
+        this.nuevoProveedor.reset();
+        window.document.getElementById('closeProveedorModal').click();
+        this.wsocket.getSocket().emit('nuevoProveedor');
       });
-      this.nuevoProveedor.reset();
-      window.document.getElementById('closeProveedorModal').click();
-      this.wsocket.getSocket().emit('nuevoProveedor');
      
 
     } catch (error) {
@@ -104,9 +105,9 @@ export class RegistrarcompraComponent implements OnInit, OnDestroy {
       let compra_json = {costo_total: costo, proveedor: pro, listado: this.articulos};
       this.servicio.post('registrar-compra', compra_json).subscribe(response => {
         console.log(response);
+        this.router.navigate(['compras']);
+        this.wsocket.getSocket().emit('nuevaCompra');
       });
-      this.router.navigate(['compras']);
-      this.wsocket.getSocket().emit('nuevaCompra');
     } else {
       alert('Debes agregar al menos un articulo a la compra.');
     }

@@ -15,6 +15,7 @@ import { InventarioComponent } from './componentes/almacen/inventario/inventario
 
 // ventas
 import { VentaComponent } from './componentes/venta/venta.component';
+import { NuevaventaComponent } from './componentes/nuevaventa/nuevaventa.component';
 
 
 // compras
@@ -28,6 +29,8 @@ const routes: Routes = [
   {path: 'ventas', component: VentaComponent, canActivate:[AuthGuard]},
   {path: 'login', component: LoginComponent, canActivate:[LoginGuard]},
   {path: 'usuarios', component: UsuariosComponent, canActivate:[AuthGuard]},
+  {path: 'registrarcompra', component: RegistrarcompraComponent, canActivate:[AuthGuard]},
+  {path: 'nuevaventa', component: NuevaventaComponent},
   {path: 'compras', component: ComprasComponent, canActivate:[AuthGuard]},   
   {path: 'registrarcompra', component: RegistrarcompraComponent, canActivate:[AuthGuard]},
   {path: '**', redirectTo: '' }

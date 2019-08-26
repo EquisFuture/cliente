@@ -6,7 +6,7 @@
 <div class="row" style="margin-top: 30px;">
     <input [(ngModel)]="buscar" name="buscar" class="form-control col-6" type="search" placeholder="Buscar" aria-label="Search" (keydown)="onKeydown($event)">
     <button (click)="buscarVenta()" class="btn btn-primary col-1" type="submit"><i class="fa fa-search"></i></button>
-    <button class="col-2 btn btn-success offset-3" data-toggle="modal" data-target="#agregar">Añadir</button>
+    <button class="col-2 btn btn-success offset-3" [routerLink]="['/nuevaventa']">Añadir</button>
 </div>
 
 <!-- Tabla de Ventas -->

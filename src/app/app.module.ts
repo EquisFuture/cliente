@@ -22,6 +22,7 @@ import { RegistrarcompraComponent } from './componentes/compras/registrarcompra/
 
 // ventas
 import { VentaComponent } from './componentes/venta/venta.component';
+import { NuevaventaComponent } from './componentes/nuevaventa/nuevaventa.component';
 
 
 
@@ -36,7 +37,9 @@ import { VentaComponent } from './componentes/venta/venta.component';
     UsuariosComponent,
     VentaComponent,
     RegistrarcompraComponent,
-    ComprasComponent
+    ComprasComponent,
+    NuevaventaComponent,
+    
   ],
   imports: [
     BrowserModule,

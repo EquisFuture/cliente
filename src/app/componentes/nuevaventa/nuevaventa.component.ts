@@ -31,7 +31,6 @@ export class NuevaventaComponent implements OnInit {
       concepto: ['', Validators.required],
       descripcion: ['', Validators.required],
       cantidad: [1, Validators.required],
-      udm: ['Pieza', Validators.required],
       precio: [1, Validators.required]
     });
     this.proveedorSelect = new FormBuilder().group({
@@ -45,8 +44,8 @@ export class NuevaventaComponent implements OnInit {
     this.getProveedores();
     this.proveedorSelect.controls.proveedor.setValue(1);
     try {
-      this.wsocket.subscripcion('compras:registro');
-      this.wsocket.traerSubscripcion('compras:registro').on('actualizarProveedores', () => {
+      this.wsocket.subscripcion('ventas:registro');
+      this.wsocket.traerSubscripcion('ventas:registro').on('actualizarProveedores', () => {
         this.getProveedores();
       });
     } catch (error) {
@@ -54,7 +53,7 @@ export class NuevaventaComponent implements OnInit {
     }
   }
   getProveedores() {
-    this.servicio.get('proveedores').subscribe( (r: Cliente []) => {
+    this.servicio.get('obtener-clientes').subscribe( (r: Cliente []) => {
      this.proveedores = r;
      console.log(r)
     });
@@ -105,11 +104,11 @@ export class NuevaventaComponent implements OnInit {
       });
       let pro = this.proveedorSelect.controls.proveedor.value;
       let compra_json = {costo_total: costo, proveedor: pro, listado: this.articulos};
-      this.servicio.post('registrar-compra', compra_json).subscribe(response => {
+      this.servicio.post('registrar-venta', compra_json).subscribe(response => {
         console.log(response);
         this.wsocket.getSocket().emit('nuevaCompra');
       });
-      this.router.navigate(['compras']);
+      this.router.navigate(['ventas']);
     } else {
       alert('Debes agregar al menos un articulo a la compra.');
     }

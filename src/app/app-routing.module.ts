@@ -32,6 +32,7 @@ const routes: Routes = [
   {path: 'registrarcompra', component: RegistrarcompraComponent, canActivate:[AuthGuard]},
   {path: 'nuevaventa', component: NuevaventaComponent},
   {path: 'compras', component: ComprasComponent, canActivate:[AuthGuard]},   
+  {path: 'registrarcompra', component: RegistrarcompraComponent, canActivate:[AuthGuard]},
   {path: '**', redirectTo: '' }
 ];
 

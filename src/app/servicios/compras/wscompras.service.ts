@@ -21,9 +21,9 @@ export class WscomprasService {
     }
   }
 
-  desconectarws() {
+  desconectarws(canal: string) {
     try {
-      this.socket.close();
+      this.traerSubscripcion(canal).close();
     } catch (error) {
       console.log(error);
     }
@@ -35,13 +35,13 @@ export class WscomprasService {
         ws.connect();
         this.socket = ws.subscribe(canal);
         this.socket.on('ready', () => {
-          console.log('Conexion exitosa al socket Compras');
+          console.log('Conexion exitosa al socket ' + canal);
         });
         this.socket.on('error', () => {
-          console.log('Conexion fallida al socket');
+          console.log('Conexion fallida al socket' + canal);
         });
         this.socket.on('close', () => {
-          console.log('conexion de socket compras cerrada');
+          console.log('conexion cerrada de socket' + canal);
         });
       } catch (error) {
         console.log(error);

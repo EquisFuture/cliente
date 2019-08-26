@@ -1,1 +1,23 @@
 <app-navbar></app-navbar>
+<div class="container">
+    <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nombre de usuario</th>
+            <th scope="col">Correo</th>
+            <th scope="col">Rol</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let usuario of usuarios">
+            <th scope="row">{{ usuario.id }}</th>
+            <td>{{ usuario.username }}</td>
+            <td>{{ usuario.email }}</td>
+            <td>{{ usuario.rol }}</td>
+            <td><button class="btn btn-info btn-block" data-toggle="modal" data-target="#editar">Editar</button></td>
+          </tr>
+        </tbody>
+      </table>
+</div>

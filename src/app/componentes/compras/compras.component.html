@@ -5,12 +5,20 @@
 
   <div class="content">
         <div class="row" style="margin-top: 40px;">
-            <input [(ngModel)]="buscar" name="buscar" class="form-control col-6" type="search" placeholder="Buscar" aria-label="Search"  (keydown)="onKeydown($event)">
-            <button  class="btn btn-primary col-1" type="submit"><i class="fa fa-search"></i></button>
-            <button class="col-2 btn btn-primary offset-2 ml-3"  [routerLink]="['/registrarcompra']"><i class="fa fa-plus-circle" aria-hidden="true"></i> Añadir </button>
+            <!-- <input [(ngModel)]="buscar" name="buscar" class="form-control col-6" type="search" placeholder="Buscar" aria-label="Search"  (keydown)="onKeydown($event)">
+            <button  class="btn btn-primary col-1" type="button" (click)="buscador(this.buscar)"><i class="fa fa-search"></i></button> -->
+            <h5 class="col-md-1 col-xs-12 col-sm-12 mt-2">Inicio</h5>
+            <input [(ngModel)]="f_inicio" class="col-md-2 col-xs-12 col-sm-12" id="f_inicio" type="date" name="" id="">
+            <h5 class="col-md-1 col-xs-12 col-sm-12 mt-2">Fin</h5>
+            <input [(ngModel)]="f_fin" class="col-md-2 col-xs-12 col-sm-12" id="f_inicio" type="date" name="" id="">
+            <button (click)="filtrar()" class="btn btn-dark col-md-2 offset-md-1  col-xs-12 col-sm-12"> <i class="fa fa-filter" aria-hidden="true"></i> Filtrar</button>
+            <button class="col-md-2 btn btn-primary  offset-md-1 col-xs-12 col-sm-12"  [routerLink]="['/registrarcompra']"><i class="fa fa-plus-circle" aria-hidden="true"></i> Añadir Compra</button>
 
 
-  
+        </div>
+        <div class="row">
+          <input [(ngModel)]="this.f_compra" class="col-md-2  col-xs-12 col-sm-12" type="number" name="" id=""  placeholder="Folio de compra">
+          <button [disabled]="folioCompra()" class="btn btn-info btn-block col-md-2 col-xs-12 col-sm-12" (click)="buscarFolioCompra(this.f_compra)" data-toggle="modal" data-target="#detalles"><i class="fa fa-info-circle" aria-hidden="true"></i> Detalles</button>
         </div>
       </div>
   
@@ -23,6 +31,7 @@
                     <th scope="col">Agente</th>
                     <th scope="col">Proveedor</th>
                     <th scope="col">Monto</th>
+                    <th scope="col">Fecha</th>
                
             </tr>
             </thead>
@@ -32,6 +41,7 @@
                     <td>{{item.autoriza}}</td>
                     <td>{{item.proveedor}}</td>
                     <td>${{item.costo_total}}</td>
+                    <td>{{item.updated_at}}</td>
 
                 </tr>
                 
@@ -39,73 +49,31 @@
     </table>
 </div>
 </div>
-<!-- Formulario de registro -->
-<div class="modal fade" id="agregar" tabindex="-1" role="dialog" aria-labelledby="agregarLabel" aria-hidden="true">
+<!-- Formulario de detalles -->
+<div class="modal fade"  id="detalles" tabindex="-1" role="dialog" aria-labelledby="agregarLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Añadir Compra</h5>
+              <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-info-circle" aria-hidden="true"></i> Detalles de Compra</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
-              <form>
+              <form *ngFor="let item of b_compra">
                 <div class="form-group">
-                  <label for="compra_registrar">compra</label>
-                  <input name="compra_registrar" type="text" class="form-control" id="compra_registrar" required>
-                </div>
-                <div class="form-group">
-                  <label for="descripcion_registrar">Descripción</label>
-                  <input  name="descripcion_registrar" type="text" class="form-control" id="descripcion_registrar" required>
-                </div>
-                <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <label for="cantidad_registrar">Cantidad</label>
-                    <input name="cantidad_registrar" min="1" type="number" class="form-control" id="cantidad_registrar" required>
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label for="udm_registrar">Unidad de medida</label>
-                    <select  name="udm_registrar" class="form-control" id="udm_registrar">
-                      <option value="Pieza">Pieza</option>
-                      <option value="Elemento">Elemento</option>
-                      <option value="Servicio">Servicio</option>
-                      <option value="Actividad">Actividad</option>
-                      <option value="Trabajo">Trabajo</option>
-                      <option value="Conjunto">Conjunto</option>
-                      <option value="Metro cuadrado">Metro cuadrado</option>
-                      <option value="Kit (Conjunto de piezas)">Kit (Conjunto de piezas)</option>
-                      <option value="Docena">Docena</option>
-                      <option value="Par">Par</option>
-                      <option value="Lote">Lote</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <label for="precio_lista_registrar">Precio Lista</label>
-                    <div class="input-group">
-                      <div class="input-group-prepend">
-                        <div class="input-group-text">$</div>
-                      </div>
-                      <input  name="precio_lista_registrar" type="number" min="1" class="form-control" id="precio_lista_registrar" required>
-                    </div>
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label for="precio_publico_registrar">Precio al público</label>
-                    <div class="input-group">
-                      <div class="input-group-prepend">
-                        <div class="input-group-text">$</div>
-                      </div>
-                      <input  name="precio_publico_registrar" type="number" min="1" class="form-control" id="precio_publico_registrar" required>
-                    </div>
-                  </div>
+                  <p>Concepto: {{item.concepto}}</p>
+                  <p>Descripcion: {{item.descripcion}}</p>
+                  <p>Cantidad: {{item.cantidad}}</p>
+                  <p>Unidad de medida: {{item.udm}}</p>
+                  <p>Precio: ${{item.precio}}</p>
+                  <p>----------------------------------------------</p>
                 </div>
               </form>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-warning text-white" data-dismiss="modal">Cancelar</button>
-              <button type="button" class="btn btn-success" data-dismiss="modal">Registrar</button>
+              <!-- <button type="button" class="btn btn-warning text-white" data-dismiss="modal">Cancelar</button>
+              <button type="button" class="btn btn-success" data-dismiss="modal">Registrar</button> -->
             </div>
           </div>
         </div>

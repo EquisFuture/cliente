@@ -3,6 +3,7 @@ import { ComprasService } from 'src/app/servicios/compras/compras.service';
 import { Router } from '@angular/router';
 import { Compra } from 'src/app/modelos/compra';
 import { WscomprasService } from 'src/app/servicios/compras/wscompras.service';
+import { ArticuloCompra } from 'src/app/modelos/articulo-compra';
 
 @Component({
   selector: 'app-compras',
@@ -15,6 +16,10 @@ export class ComprasComponent implements OnInit, OnDestroy {
   }
   tabla_compras = [];
   buscar: string;
+  f_inicio: any;
+  f_fin: any;
+  b_compra = new Array<ArticuloCompra>();
+  f_compra: any;
   constructor(private servicio: ComprasService, private router: Router, public wsocket: WscomprasService) {
    try {
      this.wsocket.traerSubscripcion('compras').close();
@@ -65,8 +70,38 @@ export class ComprasComponent implements OnInit, OnDestroy {
       this.buscador(this.buscar);
     }
   }
-  buscador(keyword: string){
-    
+  buscador(keyword: string) {
+    this.servicio.get('buscador-compras/' + keyword).subscribe( r => {
+      console.log(r);
+    });
+  }
+  filtrar() {
+    console.log('inicio: ' + this.f_inicio);
+    console.log('fin: ' + this.f_fin);
   }
 
+  buscarFolioCompra(folio: any) {
+    
+
+      this.servicio.get('buscar-compra/' + folio).subscribe( (compras_r: ArticuloCompra[] ) => {
+        console.log(compras_r);
+        this.b_compra = compras_r;
+      });
+  
+  }
+
+  folioCompra(): boolean {
+    if (this.f_compra === undefined || this.f_compra === null) {
+
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  buscarCompra(event){
+    if (event.key === 'Enter'){
+      this.buscarFolioCompra(this.f_compra);
+    }
+  }
 }

@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { VentasService} from 'src/app/servicios/ventas/ventas.service';
 import { Venta } from 'src/app/modelos/Venta';
 import {Cliente} from 'src/app/modelos/cliente'
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import {Concepto} from 'src/app/modelos/Concepto'
+import { FormGroup, FormBuilder, Validators, FormControl, Form } from '@angular/forms';
 import { Router } from '@angular/router';
 import {WsventasService} from 'src/app/servicios/ventas/wsventas.service';
 import {ArticuloCompra} from 'src/app/modelos/articulo-venta';
@@ -15,6 +16,9 @@ export class NuevaventaComponent implements OnInit {
   public nuevoProveedor: FormGroup;
   public nuevoArticulo: FormGroup;
   public proveedorSelect: FormGroup;
+  public inventarioSelect: Form;
+  //public inventarioSelect: FormGroup;
+  public inventario = new Array<Concepto>();
   constructor(private servicio: VentasService,private router: Router, private wsocket: WsventasService) {
     try {
       this.wsocket.traerSubscripcion('compras').close();
@@ -28,20 +32,22 @@ export class NuevaventaComponent implements OnInit {
       correo: ['', [Validators.required, Validators.email]]
     });
     this.nuevoArticulo = new FormBuilder().group({
-      concepto: ['', Validators.required],
-      descripcion: ['', Validators.required],
-      cantidad: [1, Validators.required],
-      precio: [1, Validators.required]
+      inventarioSelect:['',Validators.required],
+      cantidad: [1, Validators.required]
     });
     this.proveedorSelect = new FormBuilder().group({
         proveedor: ['', Validators.required]
       });
+    /*this.inventarioSelect = new FormBuilder().group({
+      inventarioSelect:['',Validators.required]
+    })*/
    }
 
   proveedores = new Array<Cliente>();
   articulos = new Array<ArticuloCompra>();
   ngOnInit() {
     this.getProveedores();
+    this.getAlmacen();
     this.proveedorSelect.controls.proveedor.setValue(1);
     try {
       this.wsocket.subscripcion('ventas:registro');
@@ -51,6 +57,14 @@ export class NuevaventaComponent implements OnInit {
     } catch (error) {
       console.log(error);
     }
+  }
+
+  getAlmacen(){
+    this.servicio.get('obtener-inventario').subscribe( (r: Concepto []) => {
+      this.inventario = r;
+      console.log('inventario')
+      console.log(r)
+     });
   }
   getProveedores() {
     this.servicio.get('obtener-clientes').subscribe( (r: Cliente []) => {
@@ -77,17 +91,26 @@ export class NuevaventaComponent implements OnInit {
     }
   }
   agregarArticulo() {
+    let desc;
+    let price;
+    this.inventario.forEach(e => {
+      if(this.nuevoArticulo.controls.inventarioSelect.value == e.concepto)
+      {
+        desc = e.descripcion;
+        price = e.precio_publico;
+      }
+    });
+    console.log(this.inventario);
     let date = new Date();
     let articulo = new ArticuloCompra();
-    articulo.concepto = this.nuevoArticulo.controls.concepto.value;
-    articulo.descripcion = this.nuevoArticulo.controls.descripcion.value;
+    articulo.concepto = this.nuevoArticulo.controls.inventarioSelect.value;
+    articulo.descripcion = desc;
     articulo.cantidad = this.nuevoArticulo.controls.cantidad.value;
-    articulo.precio = this.nuevoArticulo.controls.precio.value;
-    articulo.fecha = ""+date.getDate() + date.getUTCMonth() + date.getFullYear();
+    articulo.precio = price;
+    articulo.fecha = ""+date.getDate() + date.getMonth() + date.getFullYear();
     this.articulos.push(articulo);
     this.nuevoArticulo.reset();
     this.nuevoArticulo.controls.cantidad.setValue(1);
-    this.nuevoArticulo.controls.precio.setValue(1);
     window.document.getElementById('closeFormaArticulo').click();
 
   }
@@ -96,11 +119,11 @@ export class NuevaventaComponent implements OnInit {
   registrarCompra() {
 
     let costo = 0;
-    let importe = 0;
+    let impuesto = 0;
     if(this.articulos.length > 0) {
       this.articulos.forEach(element => {
-        importe = element.cantidad * element.precio;
-        costo = costo + importe;
+        impuesto = 0.16 * element.precio;
+        costo = costo + impuesto;
       });
       let pro = this.proveedorSelect.controls.proveedor.value;
       let compra_json = {costo_total: costo, proveedor: pro, listado: this.articulos};

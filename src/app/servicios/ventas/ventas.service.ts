@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpErrorResponse} from '@angular/common/http';
 import Ws from '@adonisjs/websocket-client';
 import { Observable,BehaviorSubject } from 'rxjs';
+import {Cliente} from 'src/app/modelos/cliente';
 import {Venta} from 'src/app/modelos/Venta'
 const ws = Ws('ws://localhost:3333')
 
@@ -13,8 +14,9 @@ export class VentasService {
   
   private ventas = new BehaviorSubject([]);
   lista_ventas = this.ventas.asObservable();
-  constructor(private request: HttpClient) { }
+  constructor(private request: HttpClient,private http: HttpClient) { }
   url = "http://localhost:3333/"
+  
   conectar(){
     try{
       // generamos la conexión al socket
@@ -68,12 +70,24 @@ export class VentasService {
     let data = JSON.stringify(json);
     let headers = new HttpHeaders().set('Content-type','Application/json').set('auth', localStorage.getItem('token'));
 
-    return this.request.post(this.url+link,data,{'headers': headers});
+    return this.http.post(this.url+link,data,{'headers': headers});
   }
   actualizarVentas(venta){
-    console.log(venta);
+    var cliente =  new Array<Cliente>();
+    this.get('obtener-clientes').subscribe( (r: Cliente []) => {
+      
+      cliente = r;
+      venta.forEach(v => {
+        cliente.forEach(c => {
+  
+          if(v.cliente == c.id){v.cliente = c.nombre_cliente}
+        });
+      });
+     });
+     
     this.ventas.next(venta);
   }
+  
   get(link:string){
     return this.request.get(this.url + link);
   }

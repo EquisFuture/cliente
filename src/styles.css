@@ -15,3 +15,22 @@ div.row{
 table{
     cursor: default;
 }
+
+.btn-buscar{
+    color: white;
+    background: rgb(0,74,163);
+    background: linear-gradient(158deg, rgba(0,74,163,1) 0%, rgba(152,242,255,1) 100%);
+    border: none;
+    border-radius: 5px;
+    -webkit-transition: width .5s; /* Safari prior 6.1 */
+    transition: .5s;
+    transition-timing-function: ease-in-out;
+}
+
+.btn-buscar.hover{
+    -webkit-transition: width .5s; /* Safari prior 6.1 */
+    transition: .5s;
+    transition-timing-function: ease-in-out;
+    background: rgb(0,74,163);
+    background: linear-gradient(158deg, rgba(0,74,163,1) 65%, rgba(201,248,255,1) 100%);
+}

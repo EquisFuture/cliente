@@ -1,0 +1,20 @@
+.card{
+    background: rgb(0,74,163);
+    background: linear-gradient(158deg, rgba(0,74,163,1) 0%, rgba(152,242,255,1) 100%);
+    max-width: 10rem; 
+    width: 10rem;
+    float: left; 
+    margin-top: 20px; 
+    margin-left: 20px; 
+    cursor: pointer;
+    border: none;
+    border-radius: 20px;
+    transform: translate3d(0px, 0px, 0px);
+    -webkit-transition: width .5s; /* Safari prior 6.1 */
+    transition: transform .5s;
+    transition-timing-function: ease-in-out;
+}
+
+.card:hover{
+    transform: translate3d(-5px, -5px, 0px);
+}

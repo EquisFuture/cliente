@@ -19,6 +19,8 @@
         <div class="row">
           <input [(ngModel)]="this.f_compra" class="col-md-2  col-xs-12 col-sm-12" type="number" name="" id=""  placeholder="Folio de compra">
           <button [disabled]="folioCompra()" class="btn btn-info btn-block col-md-2 col-xs-12 col-sm-12" (click)="buscarFolioCompra(this.f_compra)" data-toggle="modal" data-target="#detalles"><i class="fa fa-info-circle" aria-hidden="true"></i> Detalles</button>
+          <button class="btn btn-warning col-md-2 col-xs-12 col-sm-12 offset-md-6" (click)="PDF()"><i class="fa fa-print" aria-hidden="true"></i> Exportar a PDF</button> 
+       
         </div>
       </div>
   
@@ -67,11 +69,12 @@
                   <p>Cantidad: {{item.cantidad}}</p>
                   <p>Unidad de medida: {{item.udm}}</p>
                   <p>Precio: ${{item.precio}}</p>
+                  
                   <p>----------------------------------------------</p>
                 </div>
               </form>
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer">                  
               <!-- <button type="button" class="btn btn-warning text-white" data-dismiss="modal">Cancelar</button>
               <button type="button" class="btn btn-success" data-dismiss="modal">Registrar</button> -->
             </div>

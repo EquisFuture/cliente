@@ -107,7 +107,7 @@ export class NuevaventaComponent implements OnInit {
     articulo.descripcion = desc;
     articulo.cantidad = this.nuevoArticulo.controls.cantidad.value;
     articulo.precio = price;
-    articulo.fecha = ""+date.getDate() + date.getMonth() + date.getFullYear();
+    articulo.fecha = ""+date.getDate() + (date.getMonth()+1) + date.getFullYear();
     this.articulos.push(articulo);
     this.nuevoArticulo.reset();
     this.nuevoArticulo.controls.cantidad.setValue(1);
@@ -117,16 +117,17 @@ export class NuevaventaComponent implements OnInit {
 
 
   registrarCompra() {
-
+    let date = new Date()
+    let fecha = "" + date.getDate() + (date.getMonth()+1) + date.getFullYear()
     let costo = 0;
-    let impuesto = 0;
+    let impuesto = new Array<any>();
+    impuesto.length = this.inventario.length;
     if(this.articulos.length > 0) {
       this.articulos.forEach(element => {
-        impuesto = 0.16 * element.precio;
-        costo = costo + impuesto;
+        costo = costo + element.precio;
       });
       let pro = this.proveedorSelect.controls.proveedor.value;
-      let compra_json = {costo_total: costo, proveedor: pro, listado: this.articulos};
+      let compra_json = {costo_total: costo, cliente: pro,fecha:fecha, listado: this.articulos};
       this.servicio.post('registrar-venta', compra_json).subscribe(response => {
         console.log(response);
         this.wsocket.getSocket().emit('nuevaCompra');

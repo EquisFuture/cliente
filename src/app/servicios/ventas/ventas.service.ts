@@ -21,7 +21,7 @@ export class VentasService {
     try{
       // generamos la conexión al socket
       ws.connect();
-      const canal = ws.subscribe('ventas')
+      const canal = ws.subscribe('ventas:registro')
 
       // éste método se ejecutará cuando la conexión al canal inventario esté lista.
       canal.on('ready', () => {
@@ -39,7 +39,7 @@ export class VentasService {
 
   cerrarConexion(){
     try{
-      ws.getSubscription('ventas').close();
+      ws.getSubscription('ventas:registro').close();
       console.log('** desconectado del inventario')
     }
     catch(e){console.log('no hay conexion para cerrar')}
@@ -63,7 +63,7 @@ export class VentasService {
 
   enviarVentas(ventas){
     try{
-      ws.getSubscription('ventas').emit('actualizar', ventas);
+      ws.getSubscription('ventas:registro').emit('actualizar', ventas);
     }catch(e){ console.log(e); }
   }
   post(link: string, json: any){
@@ -89,6 +89,7 @@ export class VentasService {
   }
   
   get(link:string){
-    return this.request.get(this.url + link);
+    return this.http.get(this.url + link);
   }
+    
 }

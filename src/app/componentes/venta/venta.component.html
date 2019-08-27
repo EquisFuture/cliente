@@ -2,12 +2,12 @@
 <div class="container" style="margin-top: 30px;">
 <h1>Ventas</h1>
 
-<!-- Menú de búsqueda -->
-<div class="row" style="margin-top: 30px;">
-    <input [(ngModel)]="buscar" name="buscar" class="form-control col-6" type="search" placeholder="Buscar" aria-label="Search" (keydown)="onKeydown($event)">
-    <button (click)="buscarVenta()" class="btn btn-primary col-1" type="submit"><i class="fa fa-search"></i></button>
-    <button class="col-2 btn btn-success offset-3" [routerLink]="['/nuevaventa']">Añadir</button>
+
+<div class="row">
+  <button class="col-2 btn btn-success offset-8" [routerLink]="['/nuevaventa']">Añadir</button>
 </div>
+  
+
 
 <!-- Tabla de Ventas -->
   <table class="table table-hover">
@@ -19,7 +19,6 @@
         <th scope="col">Subtotal</th>
         <th scope="col">Impuesto</th>
         <th scope="col">Total</th>
-        <th> </th>
       </tr>
     </thead>
     <tbody>
@@ -30,7 +29,6 @@
         <td>$ {{ v.subtotal }} </td>
         <td>$ {{ v.impuestos}} </td>
         <td>$ {{ v.total }}</td>
-        <td><button data-toggle="modal" data-target="#detalles" type="button"  name="" id="" class="btn btn-primary btn-sm btn-block" style="width: 3rem;"><i class="fa  fa-book"></i></button></td>
       </tr>
     </tbody>
   </table>
@@ -89,7 +87,16 @@
               </button>
             </div>
             <div class="modal-body">
-              
+              <form *ngFor="let item of b_compra">
+                <div class="form-group">
+                  <p>Concepto: {{item.concepto}}</p>
+                  <p>Descripcion: {{item.descripcion}}</p>
+                  <p>Cantidad: {{item.cantidad}}</p>
+                  <p>Unidad de medida: {{item.udm}}</p>
+                  <p>Precio: ${{item.precio}}</p>
+                  <p>----------------------------------------------</p>
+                </div>
+              </form>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-warning text-white" data-dismiss="modal">Cerrar</button>

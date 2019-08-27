@@ -13,7 +13,7 @@
         </div>
 </form>
         <div class="row">
-          <button class="btn col-6  btn-outline-warning" [routerLink]="['/compras']" routerLinkActive="router-link-active"  > <i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Regresar</button>
+          <button class="btn col-6  btn-outline-warning" [routerLink]="['/ventas']" routerLinkActive="router-link-active"  > <i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Regresar</button>
           <button class="btn col-6  btn-outline-success"  (click)="registrarCompra()"><i class="fa fa-shopping-bag" aria-hidden="true"></i> Registrar Compra</button>
         </div>
       </div>
@@ -26,8 +26,8 @@
           <th>Descripcion</th>
           <th>Cantidad</th>
           <th>Precio</th>
-          <th>Accion</th>
           <th>Fecha</th>
+          <th>Accion</th>
         </tr>
         </thead>
         <tbody>
@@ -58,11 +58,12 @@
               <form [formGroup]="nuevoArticulo">
                 <div class="form-group">
                   <label for="compra_registrar">Concepto</label>
+                  <!--
                   <input formControlName="concepto" name="compra_registrar" type="text" class="form-control" id="compra_registrar" required>
-                </div>
-                <div class="form-group">
-                  <label for="descripcion_registrar">Descripción</label>
-                  <input formControlName="descripcion" name="descripcion_registrar" type="text" class="form-control" id="descripcion_registrar" required>
+                -->
+                <select formControlName="inventarioSelect" id="inventarioSelect" class="form-control col-6">
+                  <option  *ngFor="let item of inventario" value={{item.concepto}}>{{item.concepto}}</option>
+                </select>
                 </div>
                 <div class="form-row">
                   <div class="form-group col-md-6">
@@ -70,17 +71,7 @@
                     <input formControlName="cantidad" name="cantidad_registrar" min="1" type="number" class="form-control" id="cantidad_registrar" required>
                   </div>
                 </div>
-                <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <label for="precio_lista_registrar">Precio</label>
-                    <div class="input-group">
-                      <div class="input-group-prepend">
-                        <div class="input-group-text">$</div>
-                      </div>
-                      <input formControlName="precio" name="precio_lista_registrar" type="number" min="1" class="form-control" id="precio_lista_registrar" required>
-                    </div>
-                  </div>
-                </div>
+               
               </form>
             </div>
             <div class="modal-footer">

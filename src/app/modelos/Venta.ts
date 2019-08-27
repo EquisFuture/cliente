@@ -1,6 +1,6 @@
 export class Venta{
     id: number;
-    cliente: string;
+    cliente: any;
     subtotal: number;
     impuestos: number;
     fecha:string;

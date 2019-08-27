@@ -1,6 +1,17 @@
+:root {
+	--primary: #e8e8e8;
+	--secondary: #6c757d;
+	--success: #5588a3;
+	--info: #17a2b8;
+	--warning: #145374;
+	--danger: #1e2022;
+	--light: #f8f9fa;
+	--dark: #00334e;
+}
+
 .card{
-    background: rgb(0,74,163);
-    background: linear-gradient(158deg, rgba(0,74,163,1) 0%, rgba(152,242,255,1) 100%);
+    background: rgb(0,51,78);
+    background: linear-gradient(158deg, rgba(0,51,78,1) 0%, rgba(85,136,163,1) 100%);
     max-width: 10rem; 
     width: 10rem;
     float: left; 
@@ -16,5 +27,5 @@
 }
 
 .card:hover{
-    transform: translate3d(-5px, -5px, 0px);
+    transform: translate3d(-2px, -2px, 0px);
 }

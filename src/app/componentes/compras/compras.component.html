@@ -7,18 +7,16 @@
         <div class="row" style="margin-top: 40px;">
             <!-- <input [(ngModel)]="buscar" name="buscar" class="form-control col-6" type="search" placeholder="Buscar" aria-label="Search"  (keydown)="onKeydown($event)">
             <button  class="btn btn-primary col-1" type="button" (click)="buscador(this.buscar)"><i class="fa fa-search"></i></button> -->
-            <h5 class="col-md-1 col-xs-12 col-sm-12 mt-2">Inicio</h5>
-            <input [(ngModel)]="f_inicio" class="col-md-2 col-xs-12 col-sm-12" id="f_inicio" type="date" name="" id="">
-            <h5 class="col-md-1 col-xs-12 col-sm-12 mt-2">Fin</h5>
-            <input [(ngModel)]="f_fin" class="col-md-2 col-xs-12 col-sm-12" id="f_inicio" type="date" name="" id="">
-            <button (click)="filtrar()" class="btn btn-dark col-md-2 offset-md-1  col-xs-12 col-sm-12"> <i class="fa fa-filter" aria-hidden="true"></i> Filtrar</button>
-            <button class="col-md-2 btn btn-primary  offset-md-1 col-xs-12 col-sm-12"  [routerLink]="['/registrarcompra']"><i class="fa fa-plus-circle" aria-hidden="true"></i> Añadir Compra</button>
-
-
+            <h5 class="col-1 mt-2">Inicio</h5>
+            <input [(ngModel)]="f_inicio" class="col-3 fecha" id="f_inicio" type="date" name="" id="">
+            <h5 class="col-1 mt-2">Fin</h5>
+            <input [(ngModel)]="f_fin" class="col-3 fecha" id="f_inicio" type="date" name="" id="">
+            <button (click)="filtrar()" class="btn btn-dark col-3 offset-md-1 "> <i class="fa fa-filter" aria-hidden="true"></i> Filtrar</button>
         </div>
         <div class="row">
-          <input [(ngModel)]="this.f_compra" class="col-md-2  col-xs-12 col-sm-12" type="number" name="" id=""  placeholder="Folio de compra">
-          <button [disabled]="folioCompra()" class="btn btn-info btn-block col-md-2 col-xs-12 col-sm-12" (click)="buscarFolioCompra(this.f_compra)" data-toggle="modal" data-target="#detalles"><i class="fa fa-info-circle" aria-hidden="true"></i> Detalles</button>
+          <input [(ngModel)]="this.f_compra" class="col-3 fecha" type="number" name="" id=""  placeholder="Folio de compra">
+          <button [disabled]="folioCompra()" class="btn btn-info btn-block col-3" (click)="buscarFolioCompra(this.f_compra)" data-toggle="modal" data-target="#detalles"><i class="fa fa-info-circle" aria-hidden="true"></i> Detalles</button>
+          <button class="col-3 btn btn-primary  offset-3"  [routerLink]="['/registrarcompra']"><i class="fa fa-plus-circle" aria-hidden="true"></i> Añadir Compra</button>
         </div>
       </div>
   
@@ -67,7 +65,7 @@
                   <p>Cantidad: {{item.cantidad}}</p>
                   <p>Unidad de medida: {{item.udm}}</p>
                   <p>Precio: ${{item.precio}}</p>
-                  <p>----------------------------------------------</p>
+                  <hr>
                 </div>
               </form>
             </div>
@@ -78,7 +76,8 @@
           </div>
         </div>
       </div>
-      <!-- Formulario de provedores -->
+
+<!-- Formulario de provedores -->
 <div class="modal fade" id="agregarprovedor" tabindex="-1" role="dialog" aria-labelledby="agregarLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">

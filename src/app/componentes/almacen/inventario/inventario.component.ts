@@ -17,14 +17,14 @@ export class InventarioComponent implements OnInit, OnDestroy {
   udm_editar: string;
   precio_lista_editar: number;
   precio_publico_editar: number;
-  concepto_edit: Array<Concepto>;
+  concepto_edit: Concepto;
 
   inventario = new Array<Concepto>();
   buscar: string;
   ngOnInit() {
     this.inventario = new Array<Concepto>();
     this.buscar = "";
-    this.concepto_edit = new Array<Concepto>(); 
+    this.concepto_edit = new Concepto(); 
 
     this.inventarioService.conectar();
     this.obtenerInventario();
@@ -34,7 +34,7 @@ export class InventarioComponent implements OnInit, OnDestroy {
     });
 
     this.inventarioService.concepto_editar.subscribe(con => {
-      this.concepto_edit = con;
+      this.concepto_edit = (con as unknown) as Concepto;
       this.asignarConceptoEditar((con as unknown) as Concepto);
     });
   }
@@ -79,7 +79,8 @@ export class InventarioComponent implements OnInit, OnDestroy {
       this.inventarioService.editarConcepto(concepto).subscribe(inventario => {
         this.inventarioService.actualizarInventario(inventario);
       });
-      this.limpiarCamposEditar(); 
+      this.limpiarCamposEditar();
+      window.document.getElementById('cerrar_editar').click();
     }else{
       alert('complete todos los campos.')
     }
@@ -124,8 +125,9 @@ export class InventarioComponent implements OnInit, OnDestroy {
         this.inventario = inv;
         this.limpiarCampos();
       });
+      window.document.getElementById('cerrar_añadir').click();
     }else{
-      alert('complete todos los campos.')
+      alert('Revise su información.')
     }
   }
 

@@ -31,7 +31,6 @@ export class VentaComponent implements OnInit,OnDestroy {
     });
   }
   ngOnDestroy(){
-    this.ventaService.cerrarConexion();
   }
   obtenerVentas(){
     this.getClientes();
@@ -54,7 +53,7 @@ export class VentaComponent implements OnInit,OnDestroy {
     });
   }
 
-  buscarVentas(){
+  /*buscarVentas(){
     if(this.buscar){
       this.ventaService.buscarVentas(this.buscar).subscribe(inv => {
        // console.log(inv)
@@ -68,13 +67,13 @@ export class VentaComponent implements OnInit,OnDestroy {
     }else{
       this.obtenerVentas();
     }
-  }
+  }*/
   
   
-  onKeydown(event) {
+  /*onKeydown(event) {
     if (event.key === "Enter") {
       this.buscarVentas();
     }
-  }
+  }*/
 
 }

@@ -74,17 +74,22 @@ export class VentasService {
   }
   actualizarVentas(venta){
     var cliente =  new Array<Cliente>();
+    let v;if(venta){
     this.get('obtener-clientes').subscribe( (r: Cliente []) => {
       
       cliente = r;
-      venta.forEach(v => {
+      
+        venta.forEach(v => {
         cliente.forEach(c => {
   
           if(v.cliente == c.id){v.cliente = c.nombre_cliente}
         });
       });
-     });
-     
+      v = venta;
+      
+      
+     });}
+     else {venta = v}
     this.ventas.next(venta);
   }
   

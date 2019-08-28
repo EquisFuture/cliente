@@ -32,7 +32,7 @@
         <td [ngClass]="{'table-warning': (con.cantidad < 101 && con.cantidad > 50) && (con.udm == 'Pieza' || con.udm == 'Kit (Conjunto de piezas)'), 'table-danger': (con.cantidad < 51) && (con.udm == 'Pieza' || con.udm == 'Kit (Conjunto de piezas)')}"> {{ con.cantidad }} </td>
         <td>${{ con.precio_lista }}</td>
         <td>${{ con.precio_publico }}</td>
-        <td><button class="btn btn-info btn-block" data-toggle="modal" data-target="#editar">Editar</button></td>
+        <td><button class="btn btn-primary btn-block" data-toggle="modal" data-target="#editar">Editar</button></td>
       </tr>
     </tbody>
   </table>

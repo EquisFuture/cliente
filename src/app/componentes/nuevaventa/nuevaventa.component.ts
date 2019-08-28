@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { VentasService} from 'src/app/servicios/ventas/ventas.service';
 import { Venta } from 'src/app/modelos/Venta';
 import {Cliente} from 'src/app/modelos/cliente'
@@ -12,16 +12,18 @@ import {ArticuloCompra} from 'src/app/modelos/articulo-venta';
   templateUrl: './nuevaventa.component.html',
   styleUrls: ['./nuevaventa.component.css']
 })
-export class NuevaventaComponent implements OnInit {
+export class NuevaventaComponent implements OnInit,OnDestroy {
   public nuevoProveedor: FormGroup;
   public nuevoArticulo: FormGroup;
   public proveedorSelect: FormGroup;
   public inventarioSelect: Form;
+  cliente = new Array<Cliente>();
+  venta= new Array<Venta>();
   //public inventarioSelect: FormGroup;
   public inventario = new Array<Concepto>();
   constructor(private servicio: VentasService,private router: Router, private wsocket: WsventasService) {
     try {
-      this.wsocket.traerSubscripcion('compras').close();
+      this.wsocket.traerSubscripcion('ventas').close();
     } catch (error) {
       console.log(error);
     }
@@ -50,6 +52,7 @@ export class NuevaventaComponent implements OnInit {
     this.getAlmacen();
     this.proveedorSelect.controls.proveedor.setValue(1);
     try {
+      //this.servicio.conectar();
       this.wsocket.subscripcion('ventas:registro');
       this.wsocket.traerSubscripcion('ventas:registro').on('actualizarProveedores', () => {
         this.getProveedores();
@@ -58,7 +61,10 @@ export class NuevaventaComponent implements OnInit {
       console.log(error);
     }
   }
-
+  ngOnDestroy(){
+    this.obtenerVentas();
+    this.servicio.cerrarConexion();
+  }
   getAlmacen(){
     this.servicio.get('obtener-inventario').subscribe( (r: Concepto []) => {
       this.inventario = r;
@@ -118,7 +124,7 @@ export class NuevaventaComponent implements OnInit {
 
   registrarCompra() {
     let date = new Date()
-    let fecha = "" + date.getDate() + (date.getMonth()+1) + date.getFullYear()
+    let fechad:string = "" + date.getFullYear() + (date.getMonth()+1) + date.getDate()
     let costo = 0;
     let impuesto = new Array<any>();
     impuesto.length = this.inventario.length;
@@ -127,19 +133,42 @@ export class NuevaventaComponent implements OnInit {
         costo = costo + element.precio;
       });
       let pro = this.proveedorSelect.controls.proveedor.value;
-      let compra_json = {costo_total: costo, cliente: pro,fecha:fecha, listado: this.articulos};
+      let compra_json = {costo_total: costo, cliente: pro,fecha: fechad, listado: this.articulos};
       this.servicio.post('registrar-venta', compra_json).subscribe(response => {
         console.log(response);
         this.wsocket.getSocket().emit('nuevaCompra');
       });
+      this.venta = new Array<Venta>();
+      
       this.router.navigate(['ventas']);
     } else {
       alert('Debes agregar al menos un articulo a la compra.');
     }
   }
+  
   removerArticulo(index: number) {
     this.articulos.splice(index, 1);
   }
+  obtenerVentas(){
+    this.getClientes();
+    this.servicio.obtenerVentas().subscribe(venta=>{
+      this.servicio.enviarVentas(venta);
+    });
+    
+    this.venta.forEach(v => {
+      this.cliente.forEach(c => {
+        if(c.id == v.cliente){v.cliente = c.nombre_cliente}
+      });
+    });
+    console.log("ventas")
+    console.log(this.venta)
+  }
+    getClientes() {
+    this.servicio.get('obtener-clientes').subscribe( (r: Cliente []) => {
+     this.cliente = r;
+    });
+  }
+
   onKeydown(event) {
     if (event.key === 'Enter') {
       if (this.nuevoArticulo.valid) {

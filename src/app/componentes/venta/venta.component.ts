@@ -31,6 +31,7 @@ export class VentaComponent implements OnInit,OnDestroy {
     });
   }
   ngOnDestroy(){
+    this.ventaService.cerrarConexion();
   }
   obtenerVentas(){
     this.getClientes();

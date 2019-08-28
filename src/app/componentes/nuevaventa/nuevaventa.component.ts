@@ -63,6 +63,7 @@ export class NuevaventaComponent implements OnInit,OnDestroy {
   }
   ngOnDestroy(){
     this.obtenerVentas();
+    this.servicio.cerrarConexion();
   }
   getAlmacen(){
     this.servicio.get('obtener-inventario').subscribe( (r: Concepto []) => {

@@ -10,8 +10,10 @@ export class MenuAppsComponent implements OnInit {
   constructor() { }
 
   usuario: string;
+  rol: string;
   ngOnInit() {
     this.usuario = localStorage.getItem('usuario');
+    this.rol = localStorage.getItem('rol');
   }
 
 }

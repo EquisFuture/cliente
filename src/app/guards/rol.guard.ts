@@ -8,7 +8,7 @@ export class RolGuard implements CanActivate {
   constructor(private router:Router){ }
    
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot){
-    if(localStorage.getItem('rol') === 'admin'){
+    if(localStorage.getItem('rol') === 'Admin'){
       return true;
     }
     this.router.navigate(['/'])

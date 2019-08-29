@@ -26,6 +26,7 @@ export class LoginComponent implements OnInit {
         let us = JSON.parse(usuario);
         localStorage.setItem('token', us.token);
         localStorage.setItem('usuario', us.usuario);
+        localStorage.setItem('rol', us.rol);
         this.navegar.navigate(['inicio']);
       })
     }else{

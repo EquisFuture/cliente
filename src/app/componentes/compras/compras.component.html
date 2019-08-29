@@ -16,7 +16,7 @@
         <div class="row">
           <input [(ngModel)]="this.f_compra" class="col-3 fecha" type="number" name="" id=""  placeholder="Folio de compra">
           <button [disabled]="folioCompra()" class="btn btn-info btn-block col-3" (click)="buscarFolioCompra(this.f_compra)" data-toggle="modal" data-target="#detalles"><i class="fa fa-info-circle" aria-hidden="true"></i> Detalles</button>
-          <button class="btn btn-warning col-3 col-xs-12 col-sm-12 offset-md-6" (click)="PDF()"><i class="fa fa-print" aria-hidden="true"></i> Exportar a PDF</button> 
+          <button class="btn btn-warning col-3 text-white" (click)="PDF()"><i class="fa fa-print" aria-hidden="true"></i> Exportar a PDF</button> 
           <button class="col-3 btn btn-primary"  [routerLink]="['/registrarcompra']"><i class="fa fa-plus-circle" aria-hidden="true"></i> Añadir Compra</button>
         </div>
       </div>

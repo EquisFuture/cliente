@@ -23,6 +23,7 @@ import { RegistrarcompraComponent } from './componentes/compras/registrarcompra/
 // ventas
 import { VentaComponent } from './componentes/venta/venta.component';
 import { NuevaventaComponent } from './componentes/nuevaventa/nuevaventa.component';
+import { HtmltopdComponent } from './componentes/compras/htmltopd/htmltopd.component';
 
 
 
@@ -39,6 +40,7 @@ import { NuevaventaComponent } from './componentes/nuevaventa/nuevaventa.compone
     RegistrarcompraComponent,
     ComprasComponent,
     NuevaventaComponent,
+    HtmltopdComponent,
     
   ],
   imports: [

@@ -1,18 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { VentasService} from 'src/app/servicios/ventas/ventas.service'
 import { Venta } from 'src/app/modelos/Venta'
 import {Cliente} from 'src/app/modelos/cliente'
+import {ArticuloCompra} from 'src/app/modelos/articulo-venta';
 @Component({
   selector: 'app-venta',
   templateUrl: './venta.component.html',
   styleUrls: ['./venta.component.css']
 })
-export class VentaComponent implements OnInit {
+export class VentaComponent implements OnInit,OnDestroy {
 
   constructor(private ventaService: VentasService) {}
   venta= new Array<Venta>();
   cliente = new Array<Cliente>();
   buscar: string;
+  b_compra = new Array<ArticuloCompra>();
+  f_compra: any;
   ngOnInit() {
     let date = new Date();
     
@@ -26,6 +29,9 @@ export class VentaComponent implements OnInit {
     this.ventaService.lista_ventas.subscribe(inv => {
       this.venta = inv;
     });
+  }
+  ngOnDestroy(){
+    this.ventaService.cerrarConexion();
   }
   obtenerVentas(){
     this.getClientes();
@@ -48,7 +54,7 @@ export class VentaComponent implements OnInit {
     });
   }
 
-  buscarVentas(){
+  /*buscarVentas(){
     if(this.buscar){
       this.ventaService.buscarVentas(this.buscar).subscribe(inv => {
        // console.log(inv)
@@ -62,12 +68,13 @@ export class VentaComponent implements OnInit {
     }else{
       this.obtenerVentas();
     }
-  }
+  }*/
   
-  onKeydown(event) {
+  
+  /*onKeydown(event) {
     if (event.key === "Enter") {
       this.buscarVentas();
     }
-  }
+  }*/
 
 }

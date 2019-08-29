@@ -39,6 +39,10 @@ export class RegistrarcompraComponent implements OnInit, OnDestroy {
         proveedor: ['', Validators.required]
       });
    }
+  //  PDF(){
+  //   this.servicio.captureScreen();
+  // }
+
 
   proveedores = new Array<Proveedor>();
   articulos = new Array<ArticuloCompra>();

@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
+import * as jspdf from 'jspdf';  
+import html2canvas from 'html2canvas';  
 
 
 @Injectable({
@@ -7,7 +9,7 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 })
 export class ComprasService {
 
-  private url = 'http://localhost:3333/';
+  private url = 'http://192.168.4.106/3333';
 
 
   constructor(private http: HttpClient) { }
@@ -20,6 +22,17 @@ export class ComprasService {
   }
   get(link:string){
     return this.http.get(this.url + link);
+  }
+
+
+  public captureScreen(cols: string[], content: any[], title: string)  
+  {  
+    var data = window.document.getElementById('detalles');
+    let pdf = new jspdf(); 
+    pdf.text(title, 15, 10)
+    
+    pdf.autoTable(cols,content);
+    pdf.save('mypdf.pdf');
   }
 
 }

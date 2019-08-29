@@ -5,7 +5,7 @@ import {HttpClient, HttpHeaders, HttpErrorResponse} from '@angular/common/http';
 import Ws from '@adonisjs/websocket-client';
 import { Concepto } from 'src/app/modelos/Concepto';
 // la variable ws la ruta para conectarse al socket
-const ws = Ws('ws://localhost:3333')
+const ws = Ws('ws://192.168.4.106:3333')
 
 @Injectable({
   providedIn: 'root'
@@ -64,7 +64,7 @@ export class InventarioService {
   }
 
   // métodos para el inventario
-  url: string = 'http://localhost:3333/';
+  url: string = 'http://192.168.4.106:3333/';
   obtenerInventario(): Observable<Concepto[]>{
     let headers = new HttpHeaders().set('Content-Type','application/json').set('auth',localStorage.getItem('token'));
     return this.request.get<Concepto[]>(this.url +'obtener-inventario', {headers:headers});

@@ -4,12 +4,16 @@ import { Router } from '@angular/router';
 import { Compra } from 'src/app/modelos/compra';
 import { WscomprasService } from 'src/app/servicios/compras/wscompras.service';
 import { ArticuloCompra } from 'src/app/modelos/articulo-compra';
+import * as jspdf from 'jspdf';  
+import html2canvas from 'html2canvas'; 
 
 @Component({
   selector: 'app-compras',
   templateUrl: './compras.component.html',
-  styleUrls: ['./compras.component.css']
+  styleUrls: ['./compras.component.css'],
+ 
 })
+
 export class ComprasComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.wsocket.desconectarws('compras:resumen');
@@ -39,6 +43,17 @@ export class ComprasComponent implements OnInit, OnDestroy {
     } catch (error) {
       console.log(error);
     }
+
+  }
+  PDF(){
+    let cols = ['Folio','Agente','Proveedor','Monto','Fecha']
+    console.log(this.tabla_compras);
+    let content = [];
+    this.tabla_compras.forEach(element => {
+      content.push([element.id,element.autoriza,element.proveedor,element.costo_total,element.updated_at])
+    });
+    let title = 'Parallax Inc, Resumen de Compras';
+    this.servicio.captureScreen(cols,content,title);
   }
 
   getTabla() {

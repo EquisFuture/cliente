@@ -9,7 +9,10 @@
                 
             <option  *ngFor="let item of proveedores" value={{item.id}}>{{item.nombre_proveedor}}</option>
           </select>
-      
+            
+          <p>  
+              <input type="button" value="CATURE" (click)="PDF()"/>  
+             </p>
             <button class="col-2 btn btn-primary offset-2 ml-3" data-toggle="modal" data-target="#agregarprovedor"> <li class="fa fa-plus"> </li> Añadir Proveedor</button>
             <button class="col-2 btn btn-success ml-3 " data-toggle="modal" data-target="#agregar"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Añadir Articulo</button>
         </div>
@@ -35,8 +38,8 @@
 
         </tr>
         </thead>
-        <tbody>
-          <tr *ngFor="let art of articulos, let index = index">
+        <tbody id=tablita>
+          <tr *ngFor="let art of articulos, let index = index ">
             <td >{{art.concepto}}</td>
             <td >{{art.descripcion}}</td>
             <td >{{art.cantidad}}</td>

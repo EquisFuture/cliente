@@ -19,7 +19,7 @@ export class UsuariosService {
   private usuarios = new BehaviorSubject([]);
   lista_usuarios = this.usuarios.asObservable();
 
-  url: string = 'http://192.168.0.16:3333/';
+  url: string = 'http://192.168.4.106:3333/';
   constructor(private request: HttpClient) { }
 
   conectar(){

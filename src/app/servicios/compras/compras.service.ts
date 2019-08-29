@@ -9,7 +9,7 @@ import html2canvas from 'html2canvas';
 })
 export class ComprasService {
 
-  private url = 'http://localhost:3333/';
+  private url = 'http://192.168.4.106/3333';
 
 
   constructor(private http: HttpClient) { }

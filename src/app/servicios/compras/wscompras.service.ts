@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import Ws from '@adonisjs/websocket-client';
 
-const ws = Ws('ws://localhost:3333');
+const ws = Ws('ws://192.168.4.106:3333');
 
 
 @Injectable({

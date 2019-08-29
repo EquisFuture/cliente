@@ -15,7 +15,7 @@ export class VentasService {
   private ventas = new BehaviorSubject([]);
   lista_ventas = this.ventas.asObservable();
   constructor(private request: HttpClient,private http: HttpClient) { }
-  url = "http://192.168.0.16:3333/"
+  url = "http://192.168.4.106:3333/"
   
   conectar(){
     try{

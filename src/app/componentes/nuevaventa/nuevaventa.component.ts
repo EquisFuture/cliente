@@ -22,11 +22,6 @@ export class NuevaventaComponent implements OnInit,OnDestroy {
   //public inventarioSelect: FormGroup;
   public inventario = new Array<Concepto>();
   constructor(private servicio: VentasService,private router: Router, private wsocket: WsventasService) {
-    try {
-      this.wsocket.traerSubscripcion('ventas').close();
-    } catch (error) {
-      console.log(error);
-    }
     this.nuevoProveedor = new FormBuilder().group({
       nombre_proveedor: ['', Validators.required],
       direccion: ['', Validators.required],

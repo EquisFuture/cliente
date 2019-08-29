@@ -28,7 +28,7 @@ const routes: Routes = [
   {path: 'almacen', component: InventarioComponent, canActivate:[AuthGuard]},
   {path: 'ventas', component: VentaComponent, canActivate:[AuthGuard]},
   {path: 'login', component: LoginComponent, canActivate:[LoginGuard]},
-  {path: 'usuarios', component: UsuariosComponent, canActivate:[AuthGuard]},
+  {path: 'usuarios', component: UsuariosComponent, canActivate:[AuthGuard, RolGuard]},
   {path: 'registrarcompra', component: RegistrarcompraComponent, canActivate:[AuthGuard]},
   {path: 'nuevaventa', component: NuevaventaComponent},
   {path: 'compras', component: ComprasComponent, canActivate:[AuthGuard]},   

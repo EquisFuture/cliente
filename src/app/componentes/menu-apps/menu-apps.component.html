@@ -19,7 +19,7 @@
     <p class="card-text"><b>Almacen</b></p>
   </div>
 </div>
-<div [routerLink]="['/usuarios']" routerLinkActive="router-link-active"  class="card text-white mb-3">
+<div *ngIf="rol == 'Admin'" [routerLink]="['/usuarios']" routerLinkActive="router-link-active"  class="card text-white mb-3">
   <div class="card-body">
     <h2 class="card-title"><i class="fa fa-users"></i></h2>
     <p class="card-text"><b>Usuarios</b></p>

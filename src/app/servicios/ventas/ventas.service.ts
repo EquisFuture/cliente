@@ -4,7 +4,7 @@ import Ws from '@adonisjs/websocket-client';
 import { Observable,BehaviorSubject } from 'rxjs';
 import {Cliente} from 'src/app/modelos/cliente';
 import {Venta} from 'src/app/modelos/Venta'
-const ws = Ws('ws://localhost:3333')
+const ws = Ws('ws://127.0.0.1:3333')
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,7 @@ export class VentasService {
   private ventas = new BehaviorSubject([]);
   lista_ventas = this.ventas.asObservable();
   constructor(private request: HttpClient,private http: HttpClient) { }
-  url = "http://localhost:3333/"
+  url = "http://127.0.0.1:3333/"
   
   conectar(){
     try{

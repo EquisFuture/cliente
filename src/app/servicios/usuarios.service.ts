@@ -4,7 +4,7 @@ import { Usuario } from '../modelos/Usuario';
 import { BehaviorSubject, Observable } from 'rxjs';
 // la variable ws la ruta para conectarse al socket
 import Ws from '@adonisjs/websocket-client';
-const ws = Ws('ws://localhost:3333');
+const ws = Ws('ws://192.168.0.16:3333');
 
 @Injectable({
 providedIn: "root"
@@ -19,7 +19,7 @@ export class UsuariosService {
   private usuarios = new BehaviorSubject([]);
   lista_usuarios = this.usuarios.asObservable();
 
-  url: string = 'http://127.0.0.1:3333/';
+  url: string = 'http://192.168.0.16:3333/';
   constructor(private request: HttpClient) { }
 
   conectar(){

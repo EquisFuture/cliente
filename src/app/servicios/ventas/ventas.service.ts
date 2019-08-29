@@ -4,7 +4,7 @@ import Ws from '@adonisjs/websocket-client';
 import { Observable,BehaviorSubject } from 'rxjs';
 import {Cliente} from 'src/app/modelos/cliente';
 import {Venta} from 'src/app/modelos/Venta'
-const ws = Ws('ws://192.168.0.16:3333')
+const ws = Ws('ws://192.168.4.106:3333')
 
 @Injectable({
   providedIn: 'root'

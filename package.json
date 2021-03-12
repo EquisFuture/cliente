@@ -27,7 +27,7 @@
     "bootstrap": "^4.3.1",
     "font-awesome": "^4.7.0",
     "jquery": "^3.4.1",
-    "jspdf": "^1.5.3",
+    "jspdf": "^2.3.1",
     "jspdf-autotable": "^3.2.4",
     "popper.js": "^1.15.0",
     "rxjs": "~6.4.0",
